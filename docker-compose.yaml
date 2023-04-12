@@ -105,7 +105,7 @@ services:
     restart: always
     image: httpd:2.4
     volumes:
-      - /home/airflow/airflow/weather:/usr/local/apache2/htdocs
+      - ${AIRFLOW_PROJ_DIR:-.}/weather:/usr/local/apache2/htdocs
 
   postgres:
     image: postgres:13
