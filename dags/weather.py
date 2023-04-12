@@ -1,11 +1,13 @@
 import os
-import json
 import pendulum
-import urllib.request
 from datetime import timedelta
 from airflow.decorators import dag, task
 from onepasswordconnectsdk.client import Client, new_client
 import onepasswordconnectsdk
+
+# libs for the dag portion, not the boilerplate
+import json
+import urllib.request
 
 DEPLOYMENT_ENVIRONMENT = os.getenv("ENVIRONMENT")
 ONEPASSWORD_CONNECT_TOKEN = os.getenv("OP_API_TOKEN")
@@ -36,6 +38,8 @@ SECRETS = onepasswordconnectsdk.load_dict(client, REQUIRED_SECRETS)
     catchup=False,
     tags=["weather"],
 )
+
+# 🥘 Boilerplate ends here
 
 def etl_weather():
 
