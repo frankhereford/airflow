@@ -105,10 +105,18 @@ services:
     ports:
       - 80:80
       - 443:443
-    container_name: haproxy
     depends_on:
       - weather
       - airflow-webserver
+      - webhook
+
+  webhook:
+    restart: always
+    build: ./webhook
+    depends_on:
+      <<: *airflow-common-depends-on
+    volumes:
+      - ${AIRFLOW_PROJ_DIR:-.}/webhook:/app
 
   weather:
     restart: always
