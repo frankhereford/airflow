@@ -17,9 +17,10 @@ def hello_world():
 @app.route('/webhook', methods=['POST'])
 def handle_webhook():
     os.chdir('/opt/airflow')
-    d = dict(os.environ)
-    d['GIT_SSH_COMMAND'] = 'ssh -i /opt/private_key_for_github -o IdentitiesOnly=yes'
-    subprocess.run(['git', 'pull', '/opt/airflow'], env=d)
+    environment = dict(os.environ)
+    environment['GIT_SSH_COMMAND'] = 'ssh -i /opt/private_key_for_github -o IdentitiesOnly=yes -o "StrictHostKeyChecking=no"'
+    data = subprocess.run(['git', 'pull'], env=environment, cwd=r'/opt/airflow', check=True, stdout=subprocess.PIPE).stdout
+    print(data)
     return 'Received webhook payload'
 
 if __name__ == '__main__':
