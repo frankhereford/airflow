@@ -44,3 +44,4 @@ docker compose down --volumes --remove-orphans
 * disable the examples in production
   * do we want these on in dev?
 * fix UID being applied by `webhook` image on `git pull`
+* CI to block `no-merge` merges
