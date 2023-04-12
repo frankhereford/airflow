@@ -1,4 +1,4 @@
-# airflow
+# Airflow
 
 ## Features
 * local development with a high quality DX
