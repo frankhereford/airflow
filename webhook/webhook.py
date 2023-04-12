@@ -40,7 +40,7 @@ def handle_webhook():
     # sys.stderr.write(json.dumps(SECRETS))
 
     if payload["data"]["webhook_key"] == SECRET_VALUES["secret_value"]:
-        sys.stderr.write("successful auth\n")
+        sys.stderr.write("successful webhook auth\n")
         os.chdir('/opt/airflow')
         environment = dict(os.environ)
         environment['GIT_SSH_COMMAND'] = 'ssh -i /opt/private_key_for_github -o IdentitiesOnly=yes -o "StrictHostKeyChecking=no"'
@@ -48,7 +48,7 @@ def handle_webhook():
         return 'Received webhook payload'
     else:
         sys.stderr.write("failed to auth\n")
-        return 'Failed to authenticate'
+        return 'Failed to authenticate to webhook'
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)
