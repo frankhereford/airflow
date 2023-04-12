@@ -36,3 +36,4 @@ docker compose down --volumes --remove-orphans
 * check for key on the other side of the webhook
   * makes a great demo of the 1pw integration and rotation
 * disable the examples in production
+  * do we want these on in dev?
