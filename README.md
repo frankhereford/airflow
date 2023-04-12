@@ -11,10 +11,6 @@
   * built in, zero-config. You give it the secret name in 1PW, it gives you the value, right in the DAG
 * support for picking secrets based on local/production
 
-## intents
-* works as the production instance
-* works for local development with good DX
-
 ## useful commands
 ```
 # 🐚 get a root shell on the scheduler, for example
