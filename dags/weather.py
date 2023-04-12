@@ -4,8 +4,29 @@ import pendulum
 import urllib.request
 from datetime import timedelta
 from airflow.decorators import dag, task
+from onepasswordconnectsdk.client import Client, new_client
+import onepasswordconnectsdk
 
+DEPLOYMENT_ENVIRONMENT = os.getenv("ENVIRONMENT")
 ONEPASSWORD_CONNECT_TOKEN = os.getenv("OP_API_TOKEN")
+ONEPASSWORD_CONNECT_HOST = os.getenv("OP_CONNECT")
+VAULT_ID = "quvhrzaatbj2wotsjrumx3f62a"  # FLH personal Discovery Day vault
+
+if DEPLOYMENT_ENVIRONMENT == "production":
+    SECRET_NAME = "airflow.fyi production secret" # as found in 1pw
+else:
+    SECRET_NAME = "airflow.fyi development secret" # as found in 1pw
+
+REQUIRED_SECRETS = {
+    "secret_value": {
+        "opitem": SECRET_NAME,
+        "opfield": ".password",
+        "opvault": VAULT_ID,
+    },
+}
+
+client: Client = new_client(ONEPASSWORD_CONNECT_HOST, ONEPASSWORD_CONNECT_TOKEN)
+SECRETS = onepasswordconnectsdk.load_dict(client, REQUIRED_SECRETS)
 
 @dag(
     dag_id="weather-checker",
@@ -72,6 +93,7 @@ def etl_weather():
                 <div>
                     <p class="weather">{forecast}</p>
                     <p class="smaller">{time}</p>
+                    <p class='smaller'>{DEPLOYMENT_ENVIRONMENT} secret: {SECRETS["secret_value"]}</p>
                 </div>
             </body>
             </html>
