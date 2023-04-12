@@ -1,5 +1,16 @@
 # airflow
 
+## features
+* control over production deployment configuration
+* endlessly customizable python environment, including external, binary libraries built right into the container
+* local development with a high quality DX
+  * you get a full local airflow stack, so you can trigger it as if in airflow
+  * you can run the command in a terminal and get full STDOUT from the program, but also color coded print-out of the interactions with the airflow orchestration
+  * ~fail to safe~
+* onepassword secrets
+  * built in, zero-config. You give it the secret name in 1PW, it gives you the value
+* support for picking secrets based on local/production
+
 ## intents
 * works as the production instance
 * works for local development with good DX
@@ -25,15 +36,4 @@ docker compose down --volumes --remove-orphans
 ## ideas
 * make it disable all dags on start locally (default / main) so it fails to safe
 * local docker
-* dev v production env variable indicator
 
-## features
-* control over production deployment configuration
-* endlessly customizable python environment, including external, binary libraries built right into the container
-* local development with a high quality DX
-  * you get a full local airflow stack, so you can trigger it as if in airflow
-  * you can run the command in a terminal and get full STDOUT from the program, but also color coded print-out of the interactions with the airflow orchestration
-  * ~fail to safe~
-* onepassword secrets
-  * built in, zero-config. You give it the secret name in 1PW, it gives you the value
-* support for picking secrets based on local/production
