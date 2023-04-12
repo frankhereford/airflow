@@ -3,16 +3,15 @@
 name: Cause airflow production to refresh DAGs
 
 on:
-  push
-  #pull_request:
-    #branches:
-      #- production
-    #types:
-      #- closed
+  pull_request:
+    branches:
+      - production
+    types:
+      - closed
 
 jobs:
   deployment:
-    #if: github.event.pull_request.merged == true
+    if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
     steps:
       - name: Load secret
