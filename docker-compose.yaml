@@ -103,8 +103,8 @@ services:
       - "host.docker.internal:host-gateway"
     build: ./haproxy
     ports:
-      - 80:80
-      - 443:443
+      - 8080:80
+      - 8081:81
     depends_on:
       - weather
       - airflow-webserver
