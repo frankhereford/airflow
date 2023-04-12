@@ -1,7 +1,3 @@
-## remember, this app doesn't need an API key, it needs a rate limiter.
-## you can stay in sync with production all you want, just not too often.
-
-
 import sys
 import time
 import json
