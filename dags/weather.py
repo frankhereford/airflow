@@ -1,8 +1,32 @@
+import os
 import json
 import pendulum
 import urllib.request
 from datetime import timedelta
 from airflow.decorators import dag, task
+from onepasswordconnectsdk.client import Client, new_client
+import onepasswordconnectsdk
+
+DEPLOYMENT_ENVIRONMENT = os.getenv("ENVIRONMENT")
+ONEPASSWORD_CONNECT_TOKEN = os.getenv("OP_API_TOKEN")
+ONEPASSWORD_CONNECT_HOST = os.getenv("OP_CONNECT")
+VAULT_ID = "quvhrzaatbj2wotsjrumx3f62a"  # FLH personal Discovery Day vault
+
+if DEPLOYMENT_ENVIRONMENT == "production":
+    SECRET_NAME = "airflow.fyi production secret" # as found in 1pw
+else:
+    SECRET_NAME = "airflow.fyi development secret" # as found in 1pw
+
+REQUIRED_SECRETS = {
+    "secret_value": {
+        "opitem": SECRET_NAME,
+        "opfield": ".password",
+        "opvault": VAULT_ID,
+    },
+}
+
+client: Client = new_client(ONEPASSWORD_CONNECT_HOST, ONEPASSWORD_CONNECT_TOKEN)
+SECRETS = onepasswordconnectsdk.load_dict(client, REQUIRED_SECRETS)
 
 @dag(
     dag_id="weather-checker",
@@ -29,16 +53,16 @@ def etl_weather():
             data = json.loads(url.read().decode())
             return data
 
-    # A transform task which formats the weather forcast
+    # A transform task which formats the weather forecast
     @task()
-    def get_forcast(weather: dict):
+    def get_forecast(weather: dict):
         details = weather["properties"]["periods"][0]["detailedForecast"]
         period = weather["properties"]["periods"][0]["name"]
         return(f"{period}: {details}")
 
-    # A load task which writes the forcast to an HTML file
+    # A load task which writes the forecast to an HTML file
     @task()
-    def write_out_html_file(forcast: str, time: str):
+    def write_out_html_file(forecast: str, time: str):
         f = open("/opt/airflow/weather/index.html", "w")
         f.write(f"""
             <!DOCTYPE html>
@@ -51,7 +75,7 @@ def etl_weather():
                     justify-content: center;
                     align-items: center;
                     height: 100vh;
-                    background-color: darkblue;
+                    background-color: lightblue;
                 }}
                 .weather {{
                     font-weight: bold;
@@ -67,8 +91,9 @@ def etl_weather():
             </head>
             <body>
                 <div>
-                    <p class="weather">{forcast}</p>
+                    <p class="weather">{forecast}</p>
                     <p class="smaller">{time}</p>
+                    <p class='smaller'>{DEPLOYMENT_ENVIRONMENT} secret: {SECRETS["secret_value"]}</p>
                 </div>
             </body>
             </html>
@@ -78,8 +103,8 @@ def etl_weather():
 
     time = get_time_in_austin_tx()
     weather = get_weather()
-    forcast = get_forcast(weather)
-    write_out_html_file(forcast, time)
+    forecast = get_forecast(weather)
+    write_out_html_file(forecast, time)
 
 etl_weather()
 
