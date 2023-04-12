@@ -1,4 +1,5 @@
 import json
+import time
 from flask import Flask, request
 
 app = Flask(__name__)
@@ -13,6 +14,7 @@ def handle_webhook():
     payload = request.get_json()
     with open("/app/filename.txt", "w") as file:
         file.write("Webhook post\n")
+        file.write("Current date and time: " + time.ctime() + "\n")
         file.write(json.dumps(payload))
         file.write("\n")
         file.flush()
