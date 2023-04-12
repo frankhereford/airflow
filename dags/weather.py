@@ -88,7 +88,7 @@ def etl_weather():
                     justify-content: center;
                     align-items: center;
                     height: 100vh;
-                    background-color: red;
+                    background-color: darkred;
                 }}
                 .weather {{
                     font-weight: bold;
