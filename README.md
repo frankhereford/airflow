@@ -2,7 +2,8 @@
 
 ## Features
 * local development with a high quality DX
-  * you get a full, local airflow stack, so you can trigger it as if in airflow
+  * you get a full, local airflow stack
+    * so you can trigger it as if in airflow, via the UI
   * you can run the command in a terminal and get full STDOUT from the program, but also color coded print-out of the interactions with the airflow orchestration
 * onepassword secrets
   * built in, zero-config in DAG. You give it the secret name in 1PW, it gives you the value, right in the DAG
