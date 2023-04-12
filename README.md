@@ -63,7 +63,8 @@ docker compose down --volumes --remove-orphans
 ## Ideas
 * make it disable all dags on start locally (default / main) so it fails to safe
 * local docker socket pass down
-* disable the examples in production
-  * do we want these on in dev?
 * fix UID being applied by `webhook` image on `git pull`
 * CI to block `no-merge` merges
+
+## Example DAGs
+* You can turn on [this field](https://github.com/frankhereford/airflow/blob/main/docker-compose.yaml#L65) to get about 50 example DAGs of various complexity to borrow from
