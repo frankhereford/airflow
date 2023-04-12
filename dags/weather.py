@@ -67,8 +67,8 @@ def etl_weather():
             </head>
             <body>
                 <div>
-                  <p class="weather">{forcast}</p>
-                  <p class="smaller">{time}</p>
+                    <p class="weather">{forcast}</p>
+                    <p class="smaller">{time}</p>
                 </div>
             </body>
             </html>
