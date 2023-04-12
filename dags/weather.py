@@ -10,8 +10,8 @@ import onepasswordconnectsdk
 import json
 import urllib.request
 
-DEPLOYMENT_ENVIRONMENT = os.getenv("ENVIRONMENT") # where we are
-ONEPASSWORD_CONNECT_TOKEN = os.getenv("OP_API_TOKEN") # we we get our secrets
+DEPLOYMENT_ENVIRONMENT = os.getenv("ENVIRONMENT") # our current environment from ['production', 'development']
+ONEPASSWORD_CONNECT_TOKEN = os.getenv("OP_API_TOKEN") # where we get our secrets
 ONEPASSWORD_CONNECT_HOST = os.getenv("OP_CONNECT") # our secret to get secrets 🤐
 VAULT_ID = "quvhrzaatbj2wotsjrumx3f62a"  # FLH personal Discovery Day vault - not a secret, per se ..
 
