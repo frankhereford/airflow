@@ -21,6 +21,9 @@
 * GitHub key pair
   * Public installed on GitHub
   * Private in `private_key_for_github` at the top of the repo
+    * Starts and ends with 
+      * `-----BEGIN OPENSSH PRIVATE KEY-----`
+      * `-----END OPENSSH PRIVATE KEY-----` or similar
 * `.env` file in the form of:
 ```
 AIRFLOW_UID=<the numeric output of the following command: id -u>
