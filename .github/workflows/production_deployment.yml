@@ -26,4 +26,4 @@ jobs:
         uses: distributhor/workflow-webhook@v2
         env:
           webhook_url: ${{ secrets.AIRFLOW_WEBHOOK_URL}}
-          webhook_secret: ${{ secrets.WEBHOOK_KEY }}
+          webhook_secret: ${{ env.WEBHOOK_KEY }}
