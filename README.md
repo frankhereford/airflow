@@ -33,4 +33,3 @@ docker compose down --volumes --remove-orphans
 ## ideas
 * make it disable all dags on start locally (default / main) so it fails to safe
 * local docker socket pass down
-
