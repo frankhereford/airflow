@@ -29,7 +29,7 @@ def etl_weather():
             data = json.loads(url.read().decode())
             return data
 
-    # A transform task which formats the weather forcast
+    # A transform task which formats the weather forecast
     @task()
     def get_forcast(weather: dict):
         details = weather["properties"]["periods"][0]["detailedForecast"]
