@@ -6,10 +6,11 @@
     * so you can trigger it as if in airflow, via the UI
   * you can run the command in a terminal and get full STDOUT from the program, but also color coded print-out of the interactions with the airflow orchestration
 * onepassword secrets
-  * built in, zero-config in DAG. You give it the secret name in 1PW, it gives you the value, right in the DAG
+  * built in, zero-config. You give it the secret name in 1PW, it gives you the value, right in the DAG
 * working CI, secured using 1PW secrets
   * Pull on merge into production
-* support for picking secrets based on local/production
+  * You can rotate the secret by opening 1PW and generating a new PW and saving it
+* support for picking environment based secrets based on local/production
   * zero-config in DAG, based out of `.env`
 * full control over production server configuration, yet remaining with perks of docker stack
 * endlessly customizable python environment, including external, binary libraries built right into the container
