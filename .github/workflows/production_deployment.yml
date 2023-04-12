@@ -3,9 +3,7 @@
 name: Cause airflow production to refresh DAGs
 
 on:
-  push:
-    branches:
-      - ci
+  push
   #pull_request:
     #branches:
       #- production
