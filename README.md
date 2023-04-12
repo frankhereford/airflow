@@ -8,7 +8,7 @@
   * you can run the command in a terminal and get full STDOUT from the program, but also color coded print-out of the interactions with the airflow orchestration
   * ~fail to safe~
 * onepassword secrets
-  * built in, zero-config. You give it the secret name in 1PW, it gives you the value
+  * built in, zero-config. You give it the secret name in 1PW, it gives you the value, right in the DAG
 * support for picking secrets based on local/production
 
 ## intents
