@@ -1,22 +1,21 @@
 # Airflow
 
 ## Features
-* local development with a high quality DX
+* [local development](https://github.com/frankhereford/airflow#local-setup) with a high quality DX
   * you get a full, local airflow stack
     * so you can trigger it as if in airflow, via the UI
   * you can run the command in a terminal and get full STDOUT from the program, but also color coded print-out of the interactions with the airflow orchestration
-* onepassword secrets
+* [onepassword secrets](https://github.com/frankhereford/airflow#local-setup)
   * built in, zero-config. You give it the secret name in 1PW, it gives you the value, right in the DAG
-* working CI, secured using 1PW secrets
+* [working CI](https://github.com/frankhereford/airflow/blob/main/.github/workflows/production_deployment.yml), secured using 1PW secrets
   * Pull on merge into production
   * You can rotate the secret by opening 1PW and generating a new PW and saving it
 * support for picking environment based secrets based on local/production
   * zero-config in DAG, based out of `.env`
-* full control over production server configuration, yet remaining with perks of docker stack
-* endlessly customizable python environment, including external, binary libraries built right into the container
+* full control over [production server configuration](https://github.com/frankhereford/airflow/blob/main/airflow.cfg), yet remaining with perks of docker stack
+* [customizable python environment](https://github.com/frankhereford/airflow/blob/main/requirements.txt), including [external, binary libraries](https://github.com/frankhereford/airflow/blob/main/Dockerfile#L1414-L1415) built right into the container
   * based on bog standard `requirements.txt`
-* very minimal deployment settings
-  * [PR #22 lists them](https://github.com/frankhereford/airflow/pull/22/files)
+* [very minimal deployment changes](https://github.com/frankhereford/airflow/pull/22/files)
 
 ## Local Setup
 * GitHub key pair
