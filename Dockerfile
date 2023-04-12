@@ -1411,6 +1411,10 @@ WORKDIR ${AIRFLOW_HOME}
 
 EXPOSE 8080
 
+COPY airflow.cfg /opt/airflow/airflow.cfg
+RUN apt-get update
+RUN apt-get install -y aptitude magic-wormhole
+
 USER ${AIRFLOW_UID}
 
 # Those should be set and used as late as possible as any change in commit/build otherwise invalidates the
@@ -1442,5 +1446,6 @@ LABEL org.apache.airflow.distro="debian" \
   org.opencontainers.image.ref.name="airflow" \
   org.opencontainers.image.title="Production Airflow Image" \
   org.opencontainers.image.description="Reference, production-ready Apache Airflow image"
+
 ENTRYPOINT ["/usr/bin/dumb-init", "--", "/entrypoint"]
 CMD []
