@@ -1412,7 +1412,7 @@ WORKDIR ${AIRFLOW_HOME}
 EXPOSE 8080
 
 RUN apt-get update
-RUN apt-get install -y aptitude magic-wormhole vim
+RUN apt-get install -y aptitude magic-wormhole vim black
 
 USER ${AIRFLOW_UID}
 

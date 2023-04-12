@@ -14,15 +14,19 @@
 * full control over production server configuration, yet remaining with perks of docker stack
 * endlessly customizable python environment, including external, binary libraries built right into the container
   * based on bog standard `requirements.txt`
+* very minimal deployment settings
+  * [PR #9 lists them](https://github.com/frankhereford/airflow/pull/9/files)
 
 ## Useful Commands
 ```
 # 🐚 get a root shell on the scheduler, for example
+
 docker exec -u root -it airflow-airflow-scheduler-1 bash
 ```
 
 ```
 # 🐚 get a shell on a worker, for example
+
 docker exec -it airflow-airflow-worker-1 bash
 ```
 
@@ -30,6 +34,7 @@ docker exec -it airflow-airflow-worker-1 bash
 # stop all containers and execute this to reset your local database
 # ⛔️ do not run in production unless you feel really great about your backups
 # ⛔️ this will reset the history of your dag runs and switch states
+
 docker compose down --volumes --remove-orphans
 ```
 
@@ -39,3 +44,4 @@ docker compose down --volumes --remove-orphans
 * disable the examples in production
   * do we want these on in dev?
 * fix UID being applied by `webhook` image on `git pull`
+* CI to block `no-merge` merges
