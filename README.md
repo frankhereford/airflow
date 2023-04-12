@@ -1,21 +1,21 @@
 # Airflow
 
 ## Features
-* local development with a high quality DX
+* [local development](https://github.com/frankhereford/airflow#local-setup) with a high quality DX
   * you get a full, local airflow stack
-    * so you can trigger it as if in airflow, via the UI
+    * so you can trigger it as if in airflow, via [the UI](http://localhost:8080/home)
   * you can run the command in a terminal and get full STDOUT from the program, but also color coded print-out of the interactions with the airflow orchestration
-* onepassword secrets
-  * built in, zero-config in DAG. You give it the secret name in 1PW, it gives you the value, right in the DAG
-* working CI, secured using 1PW secrets
+* [onepassword secrets](https://github.com/frankhereford/airflow#local-setup)
+  * built in, zero-config. You give it the secret name in 1PW, it gives you the value, right in the DAG
+* [working CI](https://github.com/frankhereford/airflow/blob/main/.github/workflows/production_deployment.yml), secured using 1PW secrets
   * Pull on merge into production
-* support for picking secrets based on local/production
+  * You can rotate the secret by opening 1PW and generating a new PW and saving it 🏁
+* support for picking [environment based secrets](https://github.com/frankhereford/airflow/blob/main/dags/weather.py#L21-L24) based on local/production
   * zero-config in DAG, based out of `.env`
-* full control over production server configuration, yet remaining with perks of docker stack
-* endlessly customizable python environment, including external, binary libraries built right into the container
+* full control over [production server configuration](https://github.com/frankhereford/airflow/blob/main/airflow.cfg), yet remaining with perks of docker stack
+* [customizable python environment](https://github.com/frankhereford/airflow/blob/main/requirements.txt), including [external, binary libraries](https://github.com/frankhereford/airflow/blob/main/Dockerfile#L1414-L1415) built right into the container
   * based on bog standard `requirements.txt`
-* very minimal deployment settings
-  * [PR #9 lists them](https://github.com/frankhereford/airflow/pull/9/files)
+* [very minimal deployment changes](https://github.com/frankhereford/airflow/pull/22/files)
 
 ## Local Setup
 * GitHub key pair
@@ -24,6 +24,7 @@
     * Starts and ends with 
       * `-----BEGIN OPENSSH PRIVATE KEY-----`
       * `-----END OPENSSH PRIVATE KEY-----` or similar
+  * This could be eliminated if we commit to never pushing from the production install again
 * `.env` file in the form of:
 ```
 AIRFLOW_UID=<the numeric output of the following command: id -u>
@@ -63,7 +64,8 @@ docker compose down --volumes --remove-orphans
 ## Ideas
 * make it disable all dags on start locally (default / main) so it fails to safe
 * local docker socket pass down
-* disable the examples in production
-  * do we want these on in dev?
 * fix UID being applied by `webhook` image on `git pull`
 * CI to block `no-merge` merges
+
+## Example DAGs
+* You can turn on [this field](https://github.com/frankhereford/airflow/blob/main/docker-compose.yaml#L65) to get about 50 example DAGs of various complexity to borrow from
