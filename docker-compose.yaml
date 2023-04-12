@@ -97,9 +97,8 @@ services:
       - "host.docker.internal:host-gateway"
     build: ./haproxy
     ports:
-      - 8080:80
-      - 8081:81
-      - 8443:443
+      - 80:80
+      - 443:443
     container_name: haproxy
     depends_on:
       - weather
