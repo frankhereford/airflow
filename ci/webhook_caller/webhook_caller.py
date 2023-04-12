@@ -1,7 +1,7 @@
 import requests
 import json
 
-webhook_url = 'http://localhost:5000/webhook'
+webhook_url = 'https://webhook.airflow.fyi/webhook'
 
 payload = {
     'event_type': 'order_placed',
