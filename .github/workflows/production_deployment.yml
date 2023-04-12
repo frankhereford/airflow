@@ -1,0 +1,20 @@
+---
+
+name: Cause airflow production to refresh DAGs
+
+on:
+  pull_request:
+    branches:
+      - production
+    types:
+      - closed
+
+jobs:
+  deployment:
+    if: github.event.pull_request.merged == true
+    runs-on: ubuntu-latest
+    steps:
+      - name: Invoke deployment hook
+        uses: distributhor/workflow-webhook@v2
+        env:
+          webhook_url: ${{ secrets.AIRFLOW_WEBHOOK_URL}}
