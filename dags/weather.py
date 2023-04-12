@@ -4,6 +4,8 @@ import urllib.request
 from datetime import timedelta
 from airflow.decorators import dag, task
 
+ONEPASSWORD_CONNECT_TOKEN = os.getenv("OP_API_TOKEN")
+
 @dag(
     dag_id="weather-checker",
     description="A DAG which checks the weather and writes out an HTML file",
