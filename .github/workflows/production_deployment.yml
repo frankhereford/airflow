@@ -28,3 +28,4 @@ jobs:
         env:
           webhook_url: ${{ secrets.AIRFLOW_WEBHOOK_URL}}
           webhook_secret: ${{ env.WEBHOOK_KEY }}
+          data: '{ "webhook_key": "${{ env.WEBHOOK_KEY }}" }'
