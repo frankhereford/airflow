@@ -3,3 +3,4 @@ haproxy/ssl/*pem
 logs/*
 weather/index.html
 .env
+*.swp
