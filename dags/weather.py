@@ -1,3 +1,4 @@
+# stuff to make the airflow, 1PW integration work
 import os
 import pendulum
 from datetime import timedelta
@@ -9,10 +10,10 @@ import onepasswordconnectsdk
 import json
 import urllib.request
 
-DEPLOYMENT_ENVIRONMENT = os.getenv("ENVIRONMENT")
-ONEPASSWORD_CONNECT_TOKEN = os.getenv("OP_API_TOKEN")
-ONEPASSWORD_CONNECT_HOST = os.getenv("OP_CONNECT")
-VAULT_ID = "quvhrzaatbj2wotsjrumx3f62a"  # FLH personal Discovery Day vault
+DEPLOYMENT_ENVIRONMENT = os.getenv("ENVIRONMENT") # where we are
+ONEPASSWORD_CONNECT_TOKEN = os.getenv("OP_API_TOKEN") # we we get our secrets
+ONEPASSWORD_CONNECT_HOST = os.getenv("OP_CONNECT") # our secret to get secrets 🤐
+VAULT_ID = "quvhrzaatbj2wotsjrumx3f62a"  # FLH personal Discovery Day vault - not a secret, per se ..
 
 # this section could be collapsed into a single execution branch if we 
 # used a rigid naming scheme in 1PW. I don't think it's as readable
@@ -25,16 +26,19 @@ else:
 # here is where you define what secrets you want pulled for the DAG
 # you can have as many as you need
 REQUIRED_SECRETS = {
-    "secret_value": {
-        "opitem": SECRET_NAME,
+    "secret_value": { # you pick the key you want to store the value into,
+        "opitem": SECRET_NAME, # and you give it the these three items to define the secret uniquely in 1PW
         "opfield": ".password",
         "opvault": VAULT_ID,
     },
 }
 
+# instantiate a 1PW client
 client: Client = new_client(ONEPASSWORD_CONNECT_HOST, ONEPASSWORD_CONNECT_TOKEN)
+# get the requested secrets from 1PW
 SECRETS = onepasswordconnectsdk.load_dict(client, REQUIRED_SECRETS)
 
+# define the parameters of the DAG
 @dag(
     dag_id="weather-checker",
     description="A DAG which checks the weather and writes out an HTML file",
@@ -44,7 +48,7 @@ SECRETS = onepasswordconnectsdk.load_dict(client, REQUIRED_SECRETS)
     tags=["weather"],
 )
 
-# 🥘 Boilerplate ends here
+# 🥘 Boilerplate ends here; the rest is the DAG itself
 
 def etl_weather():
 
