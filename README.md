@@ -1,8 +1,9 @@
-# airflow
+# Airflow
 
-## features
+## Features
 * local development with a high quality DX
-  * you get a full local airflow stack, so you can trigger it as if in airflow
+  * you get a full, local airflow stack
+    * so you can trigger it as if in airflow, via the UI
   * you can run the command in a terminal and get full STDOUT from the program, but also color coded print-out of the interactions with the airflow orchestration
 * onepassword secrets
   * built in, zero-config in DAG. You give it the secret name in 1PW, it gives you the value, right in the DAG
@@ -12,7 +13,7 @@
 * endlessly customizable python environment, including external, binary libraries built right into the container
   * based on bog standard `requirements.txt`
 
-## useful commands
+## Useful Commands
 ```
 # 🐚 get a root shell on the scheduler, for example
 docker exec -u root -it airflow-airflow-scheduler-1 bash
@@ -30,7 +31,7 @@ docker exec -it airflow-airflow-worker-1 bash
 docker compose down --volumes --remove-orphans
 ```
 
-## ideas
+## Ideas
 * make it disable all dags on start locally (default / main) so it fails to safe
 * local docker socket pass down
 * check for key on the other side of the webhook

@@ -3,15 +3,16 @@
 name: Cause airflow production to refresh DAGs
 
 on:
-  pull_request:
-    branches:
-      - production
-    types:
-      - closed
+  push
+  #pull_request:
+    #branches:
+      #- production
+    #types:
+      #- closed
 
 jobs:
   deployment:
-    if: github.event.pull_request.merged == true
+    #if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
     steps:
       - name: Load secret
@@ -27,3 +28,4 @@ jobs:
         env:
           webhook_url: ${{ secrets.AIRFLOW_WEBHOOK_URL}}
           webhook_secret: ${{ env.WEBHOOK_KEY }}
+          data: '{ "webhook_key": "${{ env.WEBHOOK_KEY }}" }'

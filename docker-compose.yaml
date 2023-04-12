@@ -113,6 +113,8 @@ services:
   webhook:
     restart: always
     build: ./webhook
+    environment:
+      <<: *airflow-common-env
     depends_on:
       <<: *airflow-common-depends-on
     volumes:
