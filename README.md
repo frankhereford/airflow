@@ -8,14 +8,17 @@
 ```
 # 🐚 get a root shell on the scheduler, for example
 docker exec -u root -it airflow-airflow-scheduler-1 bash
+```
 
+```
 # 🐚 get a shell on a worker, for example
 docker exec -it airflow-airflow-worker-1 bash
+```
 
+```
 # stop all containers and execute this to reset your local database
 # ⛔️ do not run in production unless you feel really great about your backups
 # ⛔️ this will reset the history of your dag runs and switch states
-
 docker compose down --volumes --remove-orphans
 ```
 
