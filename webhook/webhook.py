@@ -1,7 +1,3 @@
-## remember, this app doesn't need an API key, it needs a rate limiter.
-## you can stay in sync with production all you want, just not too often.
-
-
 import sys
 import time
 import json
@@ -25,7 +21,6 @@ SECRETS = {
 }
 
 client: Client = new_client(ONEPASSWORD_CONNECT_HOST, ONEPASSWORD_CONNECT_TOKEN)
-SECRETS = onepasswordconnectsdk.load_dict(client, SECRETS)
 
 app = Flask(__name__)
 app.config['DEBUG'] = True
@@ -37,12 +32,14 @@ def hello_world():
 @app.route('/webhook', methods=['POST'])
 def handle_webhook():
     payload = request.get_json()
+    SECRET_VALUES = onepasswordconnectsdk.load_dict(client, SECRETS)
+
     # sys.stderr.write("Payload: \n")
     # sys.stderr.write(json.dumps(payload) + "\n")
     # sys.stderr.write("Secret: \n")
     # sys.stderr.write(json.dumps(SECRETS))
 
-    if payload["data"]["webhook_key"] == SECRETS["secret_value"]:
+    if payload["data"]["webhook_key"] == SECRET_VALUES["secret_value"]:
         sys.stderr.write("successful auth\n")
         os.chdir('/opt/airflow')
         environment = dict(os.environ)

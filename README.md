@@ -7,6 +7,8 @@
   * you can run the command in a terminal and get full STDOUT from the program, but also color coded print-out of the interactions with the airflow orchestration
 * onepassword secrets
   * built in, zero-config in DAG. You give it the secret name in 1PW, it gives you the value, right in the DAG
+* working CI, secured using 1PW secrets
+  * Pull on merge into production
 * support for picking secrets based on local/production
   * zero-config in DAG, based out of `.env`
 * full control over production server configuration, yet remaining with perks of docker stack
@@ -34,7 +36,6 @@ docker compose down --volumes --remove-orphans
 ## Ideas
 * make it disable all dags on start locally (default / main) so it fails to safe
 * local docker socket pass down
-* check for key on the other side of the webhook
-  * makes a great demo of the 1pw integration and rotation
 * disable the examples in production
   * do we want these on in dev?
+* fix UID being applied by `webhook` image on `git pull`
