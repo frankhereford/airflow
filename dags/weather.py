@@ -7,7 +7,7 @@ from airflow.decorators import dag, task
 @dag(
     dag_id="weather-checker",
     description="A DAG which checks the weather and writes out an HTML file",
-    schedule="0/10 * * * *",
+    schedule="0/5 * * * *",
     start_date=pendulum.datetime(2023, 4, 10, tz="UTC"),
     catchup=False,
     tags=["weather"],
