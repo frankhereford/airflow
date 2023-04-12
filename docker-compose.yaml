@@ -71,7 +71,7 @@ x-airflow-common:
     AIRFLOW__SCHEDULER__ENABLE_HEALTH_CHECK: 'true'
 
     # Quiet SQLAlchemy warnings
-    SQLALCHEMY_SILENCE_UBER_WARNING: 1
+    SQLALCHEMY_SILENCE_UBER_WARNING: 1 
 
     # WARNING: Use _PIP_ADDITIONAL_REQUIREMENTS option ONLY for a quick checks
     # for other purpose (development, test and especially production usage) build/extend Airflow image.
@@ -97,8 +97,9 @@ services:
       - "host.docker.internal:host-gateway"
     build: ./haproxy
     ports:
-      - 80:80
-      - 443:443
+      - 8080:80
+      - 8081:81
+      - 8443:443
     container_name: haproxy
     depends_on:
       - weather
@@ -108,7 +109,7 @@ services:
     restart: always
     image: httpd:2.4
     volumes:
-      - /home/airflow/airflow/weather:/usr/local/apache2/htdocs
+      - ${AIRFLOW_PROJ_DIR:-.}/weather:/usr/local/apache2/htdocs
 
   postgres:
     image: postgres:13
@@ -140,8 +141,6 @@ services:
   airflow-webserver:
     <<: *airflow-common
     command: webserver
-    # ports:
-      # - "8080:8080"
     healthcheck:
       test: ["CMD", "curl", "--fail", "http://localhost:8080/health"]
       interval: 30s
