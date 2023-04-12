@@ -15,7 +15,7 @@
 * endlessly customizable python environment, including external, binary libraries built right into the container
   * based on bog standard `requirements.txt`
 * very minimal deployment settings
-  * [PR #9 lists them](https://github.com/frankhereford/airflow/pull/9/files)
+  * [PR #22 lists them](https://github.com/frankhereford/airflow/pull/22/files)
 
 ## Local Setup
 * GitHub key pair
