@@ -71,7 +71,7 @@ x-airflow-common:
     AIRFLOW__SCHEDULER__ENABLE_HEALTH_CHECK: 'true'
 
     # Quiet SQLAlchemy warnings
-    SQLALCHEMY_SILENCE_UBER_WARNING=1
+    SQLALCHEMY_SILENCE_UBER_WARNING: 1
 
     # WARNING: Use _PIP_ADDITIONAL_REQUIREMENTS option ONLY for a quick checks
     # for other purpose (development, test and especially production usage) build/extend Airflow image.
@@ -140,8 +140,8 @@ services:
   airflow-webserver:
     <<: *airflow-common
     command: webserver
-    ports:
-      - "8080:8080"
+    # ports:
+      # - "8080:8080"
     healthcheck:
       test: ["CMD", "curl", "--fail", "http://localhost:8080/health"]
       interval: 30s
