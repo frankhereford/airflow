@@ -117,6 +117,7 @@ services:
       <<: *airflow-common-depends-on
     volumes:
       - ${AIRFLOW_PROJ_DIR:-.}/webhook:/app
+      - ${AIRFLOW_PROJ_DIR:-.}:/opt/airflow
 
   weather:
     restart: always
