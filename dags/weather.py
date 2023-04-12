@@ -14,11 +14,16 @@ ONEPASSWORD_CONNECT_TOKEN = os.getenv("OP_API_TOKEN")
 ONEPASSWORD_CONNECT_HOST = os.getenv("OP_CONNECT")
 VAULT_ID = "quvhrzaatbj2wotsjrumx3f62a"  # FLH personal Discovery Day vault
 
+# this section could be collapsed into a single execution branch if we 
+# used a rigid naming scheme in 1PW. I don't think it's as readable
+# though as what's below in saying what we're actually up to.
 if DEPLOYMENT_ENVIRONMENT == "production":
     SECRET_NAME = "airflow.fyi production secret" # as found in 1pw
 else:
     SECRET_NAME = "airflow.fyi development secret" # as found in 1pw
 
+# here is where you define what secrets you want pulled for the DAG
+# you can have as many as you need
 REQUIRED_SECRETS = {
     "secret_value": {
         "opitem": SECRET_NAME,
