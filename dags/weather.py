@@ -51,7 +51,7 @@ def etl_weather():
                     justify-content: center;
                     align-items: center;
                     height: 100vh;
-                    background-color: lightblue;
+                    background-color: darkblue;
                 }}
                 .weather {{
                     font-weight: bold;
