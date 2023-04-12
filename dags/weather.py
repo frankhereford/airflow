@@ -31,14 +31,14 @@ def etl_weather():
 
     # A transform task which formats the weather forecast
     @task()
-    def get_forcast(weather: dict):
+    def get_forecast(weather: dict):
         details = weather["properties"]["periods"][0]["detailedForecast"]
         period = weather["properties"]["periods"][0]["name"]
         return(f"{period}: {details}")
 
-    # A load task which writes the forcast to an HTML file
+    # A load task which writes the forecast to an HTML file
     @task()
-    def write_out_html_file(forcast: str, time: str):
+    def write_out_html_file(forecast: str, time: str):
         f = open("/opt/airflow/weather/index.html", "w")
         f.write(f"""
             <!DOCTYPE html>
@@ -51,7 +51,7 @@ def etl_weather():
                     justify-content: center;
                     align-items: center;
                     height: 100vh;
-                    background-color: darkblue;
+                    background-color: lightblue;
                 }}
                 .weather {{
                     font-weight: bold;
@@ -67,7 +67,7 @@ def etl_weather():
             </head>
             <body>
                 <div>
-                    <p class="weather">{forcast}</p>
+                    <p class="weather">{forecast}</p>
                     <p class="smaller">{time}</p>
                 </div>
             </body>
@@ -78,8 +78,8 @@ def etl_weather():
 
     time = get_time_in_austin_tx()
     weather = get_weather()
-    forcast = get_forcast(weather)
-    write_out_html_file(forcast, time)
+    forecast = get_forecast(weather)
+    write_out_html_file(forecast, time)
 
 etl_weather()
 
