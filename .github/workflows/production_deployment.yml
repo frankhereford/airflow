@@ -3,11 +3,12 @@
 name: Cause airflow production to refresh DAGs
 
 on:
-  pull_request:
-    branches:
-      - production
-    types:
-      - closed
+  push
+  #pull_request:
+    #branches:
+      #- production
+    #types:
+      #- closed
 
 jobs:
   deployment:
