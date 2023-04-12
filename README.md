@@ -17,6 +17,28 @@
 * very minimal deployment settings
   * [PR #9 lists them](https://github.com/frankhereford/airflow/pull/9/files)
 
+## Local Setup
+* GitHub key pair
+  * Public installed on GitHub
+  * Private in `private_key_for_github` at the top of the repo
+    * Starts and ends with 
+      * `-----BEGIN OPENSSH PRIVATE KEY-----`
+      * `-----END OPENSSH PRIVATE KEY-----` or similar
+* `.env` file in the form of:
+```
+AIRFLOW_UID=<the numeric output of the following command: id -u>
+ENVIRONMENT=<development|production>
+_AIRFLOW_WWW_USER_USERNAME=admin
+_AIRFLOW_WWW_USER_PASSWORD=<pick your initial admin pw here>
+OP_API_TOKEN=<Get from 1PW here: 'name TBD'>
+OP_CONNECT=<URL of the 1PW Connect install>
+```
+* Execute `docker compose build`
+* Execute `docker compose up -d`
+* Aiflow is available at http://localhost:8080
+* The test weather DAG output at http://localhost:8081
+* The webhook flask app at http://localhost:8082
+
 ## Useful Commands
 ```
 # 🐚 get a root shell on the scheduler, for example
