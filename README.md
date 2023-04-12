@@ -3,7 +3,7 @@
 ## Features
 * [local development](https://github.com/frankhereford/airflow#local-setup) with a high quality DX
   * you get a full, local airflow stack
-    * so you can trigger it as if in airflow, via the UI
+    * so you can trigger it as if in airflow, via [the UI](http://localhost:8080/home)
   * you can run the command in a terminal and get full STDOUT from the program, but also color coded print-out of the interactions with the airflow orchestration
 * [onepassword secrets](https://github.com/frankhereford/airflow#local-setup)
   * built in, zero-config. You give it the secret name in 1PW, it gives you the value, right in the DAG
