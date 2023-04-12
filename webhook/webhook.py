@@ -34,11 +34,6 @@ def handle_webhook():
     payload = request.get_json()
     SECRET_VALUES = onepasswordconnectsdk.load_dict(client, SECRETS)
 
-    # sys.stderr.write("Payload: \n")
-    # sys.stderr.write(json.dumps(payload) + "\n")
-    # sys.stderr.write("Secret: \n")
-    # sys.stderr.write(json.dumps(SECRETS))
-
     if payload["data"]["webhook_key"] == SECRET_VALUES["secret_value"]:
         sys.stderr.write("successful webhook auth\n")
         os.chdir('/opt/airflow')
