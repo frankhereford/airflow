@@ -8,3 +8,6 @@
 ```
 docker exec -u root -it airflow-airflow-scheduler-1 bash
 ```
+
+## ideas
+* make it disable all dags on start locally (default / main) so it fails to safe
