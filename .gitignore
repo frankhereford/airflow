@@ -6,3 +6,4 @@ weather/index.html
 venv
 *.swp
 filename.txt
+private_key_for_github
