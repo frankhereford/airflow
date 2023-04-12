@@ -4,3 +4,4 @@ logs/*
 weather/index.html
 .env
 venv
+*.swp
