@@ -24,6 +24,7 @@
     * Starts and ends with 
       * `-----BEGIN OPENSSH PRIVATE KEY-----`
       * `-----END OPENSSH PRIVATE KEY-----` or similar
+  * This could be eliminated if we commit to never pushing from the production install again
 * `.env` file in the form of:
 ```
 AIRFLOW_UID=<the numeric output of the following command: id -u>
