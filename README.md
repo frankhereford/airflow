@@ -1,4 +1,4 @@
-# Airflow for local/production use
+# Airflow 2.5.3 for local/production use
 
 ## Features
 * [local development](https://github.com/frankhereford/airflow#local-setup) with a high quality DX
