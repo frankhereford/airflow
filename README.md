@@ -9,7 +9,7 @@
     * attach to a worker `docker exec -it airflow-airflow-worker-1 bash`
     * run your dag with `airflow dags test weather-checker`, for example
     * continue to make changes to the code outside of running container and they will show up in airflow as you save
-* [onepassword secrets](https://github.com/frankhereford/airflow/blob/main/dags/weather.py#L26-L39)
+* [1Password secret support](https://github.com/frankhereford/airflow/blob/main/dags/weather.py#L26-L39)
   * built in, zero-config. You give it the secret name in 1Password, it gives you the value, right in the DAG
 * [working CI](https://github.com/frankhereford/airflow/blob/main/.github/workflows/production_deployment.yml), [via webhook](https://github.com/frankhereford/airflow/blob/main/webhook/webhook.py#L33-L46), secured using 1Password secrets
   * Automatically pulls from `production` when PRs are merged into it
