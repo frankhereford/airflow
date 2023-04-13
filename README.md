@@ -14,7 +14,7 @@
 * [working CI](https://github.com/frankhereford/airflow/blob/main/.github/workflows/production_deployment.yml), [via webhook](https://github.com/frankhereford/airflow/blob/main/webhook/webhook.py#L33-L46), secured using 1Password secrets
   * Automatically pulls from `production` when PRs are merged into it
   * You can rotate the secret by opening 1Password, editing [the entry](https://github.com/frankhereford/airflow/blob/main/webhook/webhook.py#L13), generating a new password, and saving it. 10 seconds, tops. 🏁
-* support for picking [environment based secrets](https://github.com/frankhereford/airflow/blob/main/dags/weather.py#L21-L24) based on local/production
+* support for picking [environment based secrets](https://github.com/frankhereford/airflow/blob/main/dags/weather.py#L18-L22) based on local/production
   * zero-config in DAG, based out of `.env`
 * [production environment](https://airflow.fyi) which runs on a `t3a.xlarge` class instance comfortably
   * full control over [production server configuration](https://github.com/frankhereford/airflow/blob/main/airflow.cfg), yet keeping the perks of a docker stack
