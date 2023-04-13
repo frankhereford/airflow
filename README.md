@@ -41,8 +41,8 @@ OP_CONNECT=<URL of the 1PW Connect install>
 
 ## Production Setup
 * GitHub key pair
-  * Public installed on GitHub
-  * Private in `private_key_for_github` at the top of the repo
+  * Public key installed on GitHub
+  * Private key in `private_key_for_github` at the top of the repo
     * Starts and ends with 
       * `-----BEGIN OPENSSH PRIVATE KEY-----`
       * `-----END OPENSSH PRIVATE KEY-----` or similar
