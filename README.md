@@ -12,7 +12,7 @@
 * [1Password secret support](https://github.com/frankhereford/airflow/blob/main/dags/weather.py#L26-L39)
   * built in, zero-config. You give it the secret name in 1Password, it gives you the value, right in the DAG
 * [working CI](https://github.com/frankhereford/airflow/blob/main/.github/workflows/production_deployment.yml), triggered [via](https://github.com/frankhereford/airflow/blob/main/haproxy/haproxy.cfg#L47) [webhook](https://github.com/frankhereford/airflow/blob/main/webhook/webhook.py#L33-L46), secured using 1Password secrets
-  * automatically pulls from `production` when PRs are merged into it
+  * automatically pulls from `production` when PRs are merged into the branch
   * you can rotate the secret by opening 1Password, editing [the entry](https://github.com/frankhereford/airflow/blob/main/webhook/webhook.py#L13), generating a new password, and saving it. 10 seconds, tops. 🏁
 * support for picking [environment based secrets](https://github.com/frankhereford/airflow/blob/main/dags/weather.py#L18-L22) based on local/production
   * zero-config in DAG, based out of `.env`
