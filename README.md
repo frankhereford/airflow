@@ -7,7 +7,7 @@
   * you can run the ETL in a terminal and get full STDOUT from the program, but also color coded print-out of the DAGs interactions with the airflow orchestration
     * attach to a worker `docker exec -it airflow-airflow-worker-1 bash`
     * run your dag with `airflow dags test weather-checker`, for example
-    * continue to make changes to the code outside of running container and they will show up as you save your file in airflow
+    * continue to make changes to the code outside of running container and they will show up in airflow as you save
 * [production environment](https://airflow.fyi) which runs on a `t3a.xlarge` class instance comfortably
 * [onepassword secrets](https://github.com/frankhereford/airflow/blob/main/dags/weather.py#L26-L39)
   * built in, zero-config. You give it the secret name in 1PW, it gives you the value, right in the DAG
