@@ -23,7 +23,7 @@
 * access to the [server's docker service](https://github.com/frankhereford/airflow/blob/main/docker-compose.yaml#L90)
   * On worker containers and available for DAGs
 * [flexible reverse proxy](https://github.com/frankhereford/airflow/blob/main/haproxy/haproxy.cfg#L35-L54) to distribute requests over stack
-* [very minimal deployment changes](https://github.com/frankhereford/airflow/pull/22/files)
+* [very minimal production deployment changes](https://github.com/frankhereford/airflow/pull/22/files)
   * server is vanilla Ubuntu LTS
 
 ## Local Setup
