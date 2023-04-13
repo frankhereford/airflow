@@ -6,9 +6,8 @@
     * so you can trigger it as if in airflow, via [the UI](http://localhost:8080/home)
       * stack traces available in UI
   * you can run the ETL in a terminal and get `stdout` from the program and also a color-coded output of the DAG's interactions with the airflow orchestration
-    * attach to a worker `docker exec -it airflow-airflow-worker-1 bash`
-    * run your dag with `airflow dags test weather-checker`, for example
-    * continue to make changes to the code outside of running container, and they will show up in airflow as you save
+    * `docker compose run airflow-cli dags test weather-checker`, for example
+    * continue to make changes to the code outside of docker, and they will show up in airflow as you save
 * [1Password secret support](https://github.com/frankhereford/airflow/blob/main/dags/weather.py#L26-L39)
   * built in, zero-config. You give it the secret name in 1Password, it gives you the value, right in the DAG
 * [working CI](https://github.com/frankhereford/airflow/blob/main/.github/workflows/production_deployment.yml), triggered [via](https://github.com/frankhereford/airflow/blob/main/haproxy/haproxy.cfg#L47) [webhook](https://github.com/frankhereford/airflow/blob/main/webhook/webhook.py#L33-L46), [secured](https://github.com/frankhereford/airflow/blob/main/webhook/webhook.py#L37) using a 1Password entry 
@@ -25,6 +24,8 @@
   * you can package your ETL up as an image and then run it in the DAG 📦🐳
     * skip installing libraries on the server
 * [flexible reverse proxy](https://github.com/frankhereford/airflow/blob/main/haproxy/haproxy.cfg#L35-L54) to distribute HTTP requests over stack
+* Interface with Airflow via Web UI, CLI and API
+  * CLI interface locally via: `docker compose run airflow-cli <command>`
 * [very minimal production deployment changes](https://github.com/frankhereford/airflow/pull/22/files)
   * server is EC2's vanilla Ubuntu LTS AMI
 
