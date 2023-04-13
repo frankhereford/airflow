@@ -104,11 +104,14 @@ services:
     restart: always
     extra_hosts:
       - "host.docker.internal:host-gateway"
+    environment:
+      <<: *airflow-common-env
     build: ./haproxy
     ports:
       - 8080:80
       - 8081:81
       - 8082:82
+      - 8083:83
     depends_on:
       - weather
       - airflow-webserver
