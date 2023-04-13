@@ -1,4 +1,4 @@
-# Airflow
+# Airflow for local/production use
 
 ## Features
 * [local development](https://github.com/frankhereford/airflow#local-setup) with a high quality DX
