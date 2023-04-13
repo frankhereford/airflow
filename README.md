@@ -22,7 +22,7 @@
   * based on bog standard `requirements.txt`
 * access to the [server's docker service](https://github.com/frankhereford/airflow/blob/main/docker-compose.yaml#L90)
   * On worker containers and available for DAGs
-* [flexible reverse proxy](https://github.com/frankhereford/airflow/blob/main/haproxy/haproxy.cfg#L35-L54) to distribute requests over stack
+* [flexible reverse proxy](https://github.com/frankhereford/airflow/blob/main/haproxy/haproxy.cfg#L35-L54) to distribute HTTP requests over stack
 * [very minimal production deployment changes](https://github.com/frankhereford/airflow/pull/22/files)
   * server is EC2's vanilla Ubuntu LTS AMI
 
