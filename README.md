@@ -47,6 +47,7 @@ OP_CONNECT=<URL of the 1Password Connect install>
       * `-----BEGIN OPENSSH PRIVATE KEY-----`
       * `-----END OPENSSH PRIVATE KEY-----` or similar
   * This could be eliminated if we commit to never pushing from the production install again
+    * We could change the checkout on the production machine to a `HTTPS` instead of `ssh` based git origin
 * `.env` file
   * See above
 
