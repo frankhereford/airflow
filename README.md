@@ -83,6 +83,8 @@ docker compose down --volumes --remove-orphans
 * Create remote worker image example
   * Use `docker compose` new `profile` support
 * Add slack integration?
+* 🤔 Extend CI to rotate key in 1Password after every use
+  * a true rolling token, 1 use per value
 
 ## Example DAGs
 * You can turn on [this field](https://github.com/frankhereford/airflow/blob/main/docker-compose.yaml#L65) to get about 50 example DAGs of various complexity to borrow from
