@@ -9,7 +9,6 @@
     * attach to a worker `docker exec -it airflow-airflow-worker-1 bash`
     * run your dag with `airflow dags test weather-checker`, for example
     * continue to make changes to the code outside of running container and they will show up in airflow as you save
-* [production environment](https://airflow.fyi) which runs on a `t3a.xlarge` class instance comfortably
 * [onepassword secrets](https://github.com/frankhereford/airflow/blob/main/dags/weather.py#L26-L39)
   * built in, zero-config. You give it the secret name in 1Password, it gives you the value, right in the DAG
 * [working CI](https://github.com/frankhereford/airflow/blob/main/.github/workflows/production_deployment.yml), [via webhook](https://github.com/frankhereford/airflow/blob/main/webhook/webhook.py#L33-L46), secured using 1Password secrets
@@ -17,8 +16,9 @@
   * You can rotate the secret by opening 1Password, editing [the entry](https://github.com/frankhereford/airflow/blob/main/webhook/webhook.py#L13), generating a new password, and saving it. 🏁
 * support for picking [environment based secrets](https://github.com/frankhereford/airflow/blob/main/dags/weather.py#L21-L24) based on local/production
   * zero-config in DAG, based out of `.env`
-* full control over [production server configuration](https://github.com/frankhereford/airflow/blob/main/airflow.cfg), yet remaining with perks of docker stack
-* [customizable python environment](https://github.com/frankhereford/airflow/blob/main/requirements.txt), including [external, binary libraries](https://github.com/frankhereford/airflow/blob/main/Dockerfile#L1414-L1415) built right into the container
+* [production environment](https://airflow.fyi) which runs on a `t3a.xlarge` class instance comfortably
+  * full control over [production server configuration](https://github.com/frankhereford/airflow/blob/main/airflow.cfg), yet remaining with perks of docker stack
+* [customizable python environment](https://github.com/frankhereford/airflow/blob/main/requirements.txt) for DAGs, including [external, binary libraries](https://github.com/frankhereford/airflow/blob/main/Dockerfile#L1414-L1415) built right into the container
   * based on bog standard `requirements.txt`
 * Access to the [server's docker service](https://github.com/frankhereford/airflow/blob/main/docker-compose.yaml#L90)
   * On worker containers and available for DAGs
