@@ -83,7 +83,7 @@ docker compose down --volumes --remove-orphans
 * Create remote worker image example
   * Use `docker compose` new `profile` support
 * Add slack integration?
-* 🤔 Extend CI to rotate key in 1Password after every use
+* 🤔 Extend webhook to rotate key in 1Password after every use
   * a true rolling token, 1 use per value
 
 ## Example DAGs
