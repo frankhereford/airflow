@@ -6,9 +6,8 @@
     * so you can trigger it as if in airflow, via [the UI](http://localhost:8080/home)
       * stack traces available in UI
   * you can run the ETL in a terminal and get `stdout` from the program and also a color-coded output of the DAG's interactions with the airflow orchestration
-    * attach to a worker `docker exec -it airflow-airflow-worker-1 bash`
-    * run your dag with `airflow dags test weather-checker`, for example
-    * continue to make changes to the code outside of running container, and they will show up in airflow as you save
+    * `docker compose run airflow-cli dags test weather-checker`, for example
+    * continue to make changes to the code outside of docker, and they will show up in airflow as you save
 * [1Password secret support](https://github.com/frankhereford/airflow/blob/main/dags/weather.py#L26-L39)
   * built in, zero-config. You give it the secret name in 1Password, it gives you the value, right in the DAG
 * [working CI](https://github.com/frankhereford/airflow/blob/main/.github/workflows/production_deployment.yml), triggered [via](https://github.com/frankhereford/airflow/blob/main/haproxy/haproxy.cfg#L47) [webhook](https://github.com/frankhereford/airflow/blob/main/webhook/webhook.py#L33-L46), [secured](https://github.com/frankhereford/airflow/blob/main/webhook/webhook.py#L37) using a 1Password entry 
@@ -16,6 +15,8 @@
   * you can rotate the webhook token by opening 1Password, editing [the entry](https://github.com/frankhereford/airflow/blob/main/webhook/webhook.py#L13), generating a new password, and saving it. 10 seconds, tops. 🏁
 * support for picking [environment based secrets](https://github.com/frankhereford/airflow/blob/main/dags/weather.py#L18-L22) based on local/production
   * zero-config in DAG, based out of `.env`
+* Supports remote workers
+  * Monitor their status with web UI
 * [production environment](https://airflow.fyi) which runs on a `t3a.xlarge` class instance comfortably
   * full control over [production server configuration](https://github.com/frankhereford/airflow/blob/main/airflow.cfg), yet keeping the perks of a docker stack
 * [customizable python environment](https://github.com/frankhereford/airflow/blob/main/requirements.txt) for DAGs, including [external, binary libraries](https://github.com/frankhereford/airflow/blob/main/Dockerfile#L1414-L1415) built right into the container
@@ -25,6 +26,8 @@
   * you can package your ETL up as an image and then run it in the DAG 📦🐳
     * skip installing libraries on the server
 * [flexible reverse proxy](https://github.com/frankhereford/airflow/blob/main/haproxy/haproxy.cfg#L35-L54) to distribute HTTP requests over stack
+* Interface with Airflow via Web UI, CLI and API
+  * CLI interface locally via: `docker compose run airflow-cli <command>`
 * [very minimal production deployment changes](https://github.com/frankhereford/airflow/pull/22/files)
   * server is EC2's vanilla Ubuntu LTS AMI
 
@@ -43,6 +46,7 @@ OP_CONNECT=<URL of the 1Password Connect install>
 * Airflow is available at http://localhost:8080
 * The test weather DAG output at http://localhost:8081
 * The webhook flask app at http://localhost:8082
+* The workers' status page at http://localhost:8083
 
 ## Production Setup
 * GitHub key pair
@@ -82,7 +86,7 @@ docker compose down --volumes --remove-orphans
 * Fix UID being applied by `webhook` image on `git pull`
 * Create remote worker image example
   * Use `docker compose` new `profile` support
-* Add slack integration?
+* Add slack integration
 * 🤔 Extend webhook to rotate key in 1Password after every use
   * a true rolling token, 1 use per value
 

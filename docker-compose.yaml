@@ -69,6 +69,8 @@ x-airflow-common:
     OP_API_TOKEN: ${OP_API_TOKEN}
     OP_CONNECT: ${OP_CONNECT}
     ENVIRONMENT: ${ENVIRONMENT}
+    FLOWER_AUTH_USERNAME: ${_AIRFLOW_WWW_USER_USERNAME}
+    FLOWER_AUTH_PASSWORD: ${_AIRFLOW_WWW_USER_PASSWORD}
 
     # yamllint disable rule:line-length
     # Use simple http server on scheduler for health checks
@@ -102,10 +104,15 @@ services:
     restart: always
     extra_hosts:
       - "host.docker.internal:host-gateway"
+    environment:
+      <<: *airflow-common-env
     build: ./haproxy
     ports:
-      - 80:80
-      - 443:443
+      - 8080:80
+      - 8081:81
+      - 8082:82
+      - 8083:83
+
     depends_on:
       - weather
       - airflow-webserver
@@ -314,16 +321,9 @@ services:
       - -c
       - airflow
 
-  # You can enable flower by adding "--profile flower" option e.g. docker-compose --profile flower up
-  # or by explicitly targeted on the command line e.g. docker-compose up flower.
-  # See: https://docs.docker.com/compose/profiles/
   flower:
     <<: *airflow-common
     command: celery flower
-    profiles:
-      - flower
-    ports:
-      - "5555:5555"
     healthcheck:
       test: ["CMD", "curl", "--fail", "http://localhost:5555/"]
       interval: 30s
