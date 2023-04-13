@@ -18,13 +18,6 @@
 * [very minimal deployment changes](https://github.com/frankhereford/airflow/pull/22/files)
 
 ## Local Setup
-* GitHub key pair
-  * Public installed on GitHub
-  * Private in `private_key_for_github` at the top of the repo
-    * Starts and ends with 
-      * `-----BEGIN OPENSSH PRIVATE KEY-----`
-      * `-----END OPENSSH PRIVATE KEY-----` or similar
-  * This could be eliminated if we commit to never pushing from the production install again
 * `.env` file in the form of:
 ```
 AIRFLOW_UID=<the numeric output of the following command: id -u>
@@ -39,6 +32,17 @@ OP_CONNECT=<URL of the 1PW Connect install>
 * Aiflow is available at http://localhost:8080
 * The test weather DAG output at http://localhost:8081
 * The webhook flask app at http://localhost:8082
+
+## Production Setup
+* GitHub key pair
+  * Public installed on GitHub
+  * Private in `private_key_for_github` at the top of the repo
+    * Starts and ends with 
+      * `-----BEGIN OPENSSH PRIVATE KEY-----`
+      * `-----END OPENSSH PRIVATE KEY-----` or similar
+  * This could be eliminated if we commit to never pushing from the production install again
+* `.env` file
+  * See above
 
 ## Useful Commands
 ```
