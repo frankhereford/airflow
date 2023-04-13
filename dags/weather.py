@@ -1,4 +1,4 @@
-# stuff to make the airflow, 1PW integration work
+# stuff to make the airflow, 1Password integration work
 import os
 import pendulum
 from datetime import timedelta
@@ -25,15 +25,15 @@ else:
 # you can have as many as you need
 REQUIRED_SECRETS = {
     "secret_value": {          # you pick the key you want to store the value into,
-        "opitem": SECRET_NAME, # and you give it the these three items to define the secret uniquely in 1PW
+        "opitem": SECRET_NAME, # and you give it the these three items to define the secret uniquely in 1Password
         "opfield": ".password",
         "opvault": VAULT_ID,
     },
 }
 
-# instantiate a 1PW client
+# instantiate a 1Password client
 client: Client = new_client(ONEPASSWORD_CONNECT_HOST, ONEPASSWORD_CONNECT_TOKEN)
-# get the requested secrets from 1PW
+# get the requested secrets from 1Password
 SECRETS = onepasswordconnectsdk.load_dict(client, REQUIRED_SECRETS)
 
 # define the parameters of the DAG
