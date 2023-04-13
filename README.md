@@ -73,7 +73,6 @@ docker compose down --volumes --remove-orphans
 
 ## Ideas
 * make it disable all dags on start locally (default / main) so it fails to safe
-* local docker socket pass down
 * fix UID being applied by `webhook` image on `git pull`
 * CI to block `no-merge` merges
 
