@@ -36,8 +36,8 @@ _AIRFLOW_WWW_USER_PASSWORD=<pick your initial admin pw here>
 OP_API_TOKEN=<Get from 1Password here: 'name TBD'>
 OP_CONNECT=<URL of the 1Password Connect install>
 ```
-* Execute `docker compose build`
-* Execute `docker compose up -d`
+* `docker compose build`
+* `docker compose up -d`
 * Airflow is available at http://localhost:8080
 * The test weather DAG output at http://localhost:8081
 * The webhook flask app at http://localhost:8082
