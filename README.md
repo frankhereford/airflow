@@ -4,23 +4,23 @@
 * [local development](https://github.com/frankhereford/airflow#local-setup) with a high quality DX
   * you get a full, local airflow stack
     * so you can trigger it as if in airflow, via [the UI](http://localhost:8080/home)
-  * you can run the ETL in a terminal and get full STDOUT from the program, but also color coded print-out of the interactions with the airflow orchestration
+  * you can run the ETL in a terminal and get full STDOUT from the program, but also color coded print-out of the DAGs interactions with the airflow orchestration
     * attach to a worker `docker exec -it airflow-airflow-worker-1 bash`
     * run your dag with `airflow dags test weather-checker`, for example
     * continue to make changes to the code outside of running container and they will show up as you save your file in airflow
 * [production environment](https://airflow.fyi) which runs on a `t3a.xlarge` class instance comfortably
-* [onepassword secrets](https://github.com/frankhereford/airflow#local-setup)
+* [onepassword secrets](https://github.com/frankhereford/airflow/blob/main/dags/weather.py#L26-L39)
   * built in, zero-config. You give it the secret name in 1PW, it gives you the value, right in the DAG
 * [working CI](https://github.com/frankhereford/airflow/blob/main/.github/workflows/production_deployment.yml), secured using 1PW secrets
   * Automatically pulls from `production` when PRs are merged into it
-  * You can rotate the secret by opening 1PW and generating a new PW and saving it 🏁
+  * You can rotate the secret by opening 1PW, editing the entry, generating a new PW and saving it. 🏁
 * support for picking [environment based secrets](https://github.com/frankhereford/airflow/blob/main/dags/weather.py#L21-L24) based on local/production
   * zero-config in DAG, based out of `.env`
 * full control over [production server configuration](https://github.com/frankhereford/airflow/blob/main/airflow.cfg), yet remaining with perks of docker stack
 * [customizable python environment](https://github.com/frankhereford/airflow/blob/main/requirements.txt), including [external, binary libraries](https://github.com/frankhereford/airflow/blob/main/Dockerfile#L1414-L1415) built right into the container
   * based on bog standard `requirements.txt`
 * Access to the [server's docker service](https://github.com/frankhereford/airflow/blob/main/docker-compose.yaml#L90)
-  * On worker images and available for DAGs
+  * On worker containers and available for DAGs
 * [very minimal deployment changes](https://github.com/frankhereford/airflow/pull/22/files)
 
 ## Local Setup
@@ -74,7 +74,9 @@ docker compose down --volumes --remove-orphans
 ## Ideas
 * make it disable all dags on start locally (default / main) so it fails to safe
 * fix UID being applied by `webhook` image on `git pull`
-* CI to block `no-merge` merges
+* Create remote worker image example
+  * Use `docker compose` new `profile` support
+* Add slack integration?
 
 ## Example DAGs
 * You can turn on [this field](https://github.com/frankhereford/airflow/blob/main/docker-compose.yaml#L65) to get about 50 example DAGs of various complexity to borrow from
