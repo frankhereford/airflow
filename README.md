@@ -24,7 +24,7 @@
 * [very minimal deployment changes](https://github.com/frankhereford/airflow/pull/22/files)
 
 ## Local Setup
-* `.env` file in the form of:
+* `.env` file:
 ```
 AIRFLOW_UID=<the numeric output of the following command: id -u>
 ENVIRONMENT=<development|production>
