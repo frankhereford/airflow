@@ -20,5 +20,5 @@ jobs:
       - name: WIP Check
         uses: tim-actions/wip-check@master
         with:
-          labels: '["nomerge", "wip", "rfc"]'
+          labels: '["no-merge", "wip", "rfc"]'
           keywords: '["WIP", "wip", "RFC", "rfc"]'
