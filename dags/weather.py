@@ -10,23 +10,21 @@ import onepasswordconnectsdk
 import json
 import urllib.request
 
-DEPLOYMENT_ENVIRONMENT = os.getenv("ENVIRONMENT") # our current environment from ['production', 'development']
-ONEPASSWORD_CONNECT_TOKEN = os.getenv("OP_API_TOKEN") # where we get our secrets
-ONEPASSWORD_CONNECT_HOST = os.getenv("OP_CONNECT") # our secret to get secrets 🤐
-VAULT_ID = "quvhrzaatbj2wotsjrumx3f62a"  # FLH personal Discovery Day vault - not a secret, per se ..
+DEPLOYMENT_ENVIRONMENT = os.getenv("ENVIRONMENT")     # our current environment from ['production', 'development']
+ONEPASSWORD_CONNECT_TOKEN = os.getenv("OP_API_TOKEN") # our secret to get secrets 🤐
+ONEPASSWORD_CONNECT_HOST = os.getenv("OP_CONNECT")    # where we get our secrets
+VAULT_ID = "quvhrzaatbj2wotsjrumx3f62a"               # FLH personal Discovery Day vault - not a secret, per se ..
 
-# this section could be collapsed into a single execution branch if we 
-# used a rigid naming scheme in 1PW. I don't think it's as readable
-# though as what's below in saying what we're actually up to.
+# These secret names are entry titles in our 1Password secret vault.
 if DEPLOYMENT_ENVIRONMENT == "production":
-    SECRET_NAME = "airflow.fyi production secret" # as found in 1pw
+    SECRET_NAME = "airflow.fyi production secret"
 else:
-    SECRET_NAME = "airflow.fyi development secret" # as found in 1pw
+    SECRET_NAME = "airflow.fyi development secret"
 
 # here is where you define what secrets you want pulled for the DAG
 # you can have as many as you need
 REQUIRED_SECRETS = {
-    "secret_value": { # you pick the key you want to store the value into,
+    "secret_value": {          # you pick the key you want to store the value into,
         "opitem": SECRET_NAME, # and you give it the these three items to define the secret uniquely in 1PW
         "opfield": ".password",
         "opvault": VAULT_ID,
