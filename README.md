@@ -77,6 +77,7 @@ docker compose down --volumes --remove-orphans
 * CI to block `no-merge` merges
 * Create remote worker image example
   * Use `docker compose` new `profile` support
+* Add slack integration?
 
 ## Example DAGs
 * You can turn on [this field](https://github.com/frankhereford/airflow/blob/main/docker-compose.yaml#L65) to get about 50 example DAGs of various complexity to borrow from
