@@ -15,6 +15,8 @@
   * you can rotate the webhook token by opening 1Password, editing [the entry](https://github.com/frankhereford/airflow/blob/main/webhook/webhook.py#L13), generating a new password, and saving it. 10 seconds, tops. 🏁
 * support for picking [environment based secrets](https://github.com/frankhereford/airflow/blob/main/dags/weather.py#L18-L22) based on local/production
   * zero-config in DAG, based out of `.env`
+* Supports remote workers
+  * Monitor their status with web UI
 * [production environment](https://airflow.fyi) which runs on a `t3a.xlarge` class instance comfortably
   * full control over [production server configuration](https://github.com/frankhereford/airflow/blob/main/airflow.cfg), yet keeping the perks of a docker stack
 * [customizable python environment](https://github.com/frankhereford/airflow/blob/main/requirements.txt) for DAGs, including [external, binary libraries](https://github.com/frankhereford/airflow/blob/main/Dockerfile#L1414-L1415) built right into the container
@@ -44,6 +46,7 @@ OP_CONNECT=<URL of the 1Password Connect install>
 * Airflow is available at http://localhost:8080
 * The test weather DAG output at http://localhost:8081
 * The webhook flask app at http://localhost:8082
+* The workers' status page at http://localhost:8083
 
 ## Production Setup
 * GitHub key pair
@@ -83,7 +86,7 @@ docker compose down --volumes --remove-orphans
 * Fix UID being applied by `webhook` image on `git pull`
 * Create remote worker image example
   * Use `docker compose` new `profile` support
-* Add slack integration?
+* Add slack integration
 * 🤔 Extend webhook to rotate key in 1Password after every use
   * a true rolling token, 1 use per value
 
