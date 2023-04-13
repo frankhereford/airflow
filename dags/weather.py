@@ -58,7 +58,7 @@ def etl_weather():
         current_time = pendulum.now("America/Chicago") 
         return current_time.strftime("%m/%d/%Y, %H:%M:%S")
 
-    # A extract task which pulls the weather from the NOAA API
+    # An extract task which pulls the weather forecast from the NOAA API
     @task()
     def get_weather():
         # open a URL and parse the JSON it returns
