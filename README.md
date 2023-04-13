@@ -26,7 +26,7 @@
   * available on worker containers and available for DAGs
   * you can package your ETL up as an image and then run it in the DAG 📦🐳
     * skip installing libraries on the server
-* [flexible reverse proxy](https://github.com/frankhereford/airflow/blob/main/haproxy/haproxy.cfg#L35-L54) to distribute HTTP requests over stack
+* [flexible reverse proxy](https://github.com/frankhereford/airflow/blob/main/haproxy/haproxy.cfg#L38-L68) to distribute HTTP requests over stack
 * Interface with Airflow via Web UI, CLI and API
   * CLI interface locally via: `docker compose run airflow-cli <command>`
 * [very minimal production deployment changes](https://github.com/frankhereford/airflow/pull/34/files)
