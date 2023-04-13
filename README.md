@@ -20,7 +20,7 @@
   * full control over [production server configuration](https://github.com/frankhereford/airflow/blob/main/airflow.cfg), yet remaining with perks of docker stack
 * [customizable python environment](https://github.com/frankhereford/airflow/blob/main/requirements.txt) for DAGs, including [external, binary libraries](https://github.com/frankhereford/airflow/blob/main/Dockerfile#L1414-L1415) built right into the container
   * based on bog standard `requirements.txt`
-* Access to the [server's docker service](https://github.com/frankhereford/airflow/blob/main/docker-compose.yaml#L90)
+* access to the [server's docker service](https://github.com/frankhereford/airflow/blob/main/docker-compose.yaml#L90)
   * On worker containers and available for DAGs
 * [very minimal deployment changes](https://github.com/frankhereford/airflow/pull/22/files)
 
