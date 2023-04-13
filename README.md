@@ -10,10 +10,10 @@
     * continue to make changes to the code outside of running container and they will show up in airflow as you save
 * [production environment](https://airflow.fyi) which runs on a `t3a.xlarge` class instance comfortably
 * [onepassword secrets](https://github.com/frankhereford/airflow/blob/main/dags/weather.py#L26-L39)
-  * built in, zero-config. You give it the secret name in 1PW, it gives you the value, right in the DAG
-* [working CI](https://github.com/frankhereford/airflow/blob/main/.github/workflows/production_deployment.yml), secured using 1PW secrets
+  * built in, zero-config. You give it the secret name in 1Password, it gives you the value, right in the DAG
+* [working CI](https://github.com/frankhereford/airflow/blob/main/.github/workflows/production_deployment.yml), secured using 1Password secrets
   * Automatically pulls from `production` when PRs are merged into it
-  * You can rotate the secret by opening 1PW, editing the entry, generating a new PW and saving it. 🏁
+  * You can rotate the secret by opening 1Password, editing the entry, generating a new passowrd, and saving it. 🏁
 * support for picking [environment based secrets](https://github.com/frankhereford/airflow/blob/main/dags/weather.py#L21-L24) based on local/production
   * zero-config in DAG, based out of `.env`
 * full control over [production server configuration](https://github.com/frankhereford/airflow/blob/main/airflow.cfg), yet remaining with perks of docker stack
@@ -30,8 +30,8 @@ AIRFLOW_UID=<the numeric output of the following command: id -u>
 ENVIRONMENT=<development|production>
 _AIRFLOW_WWW_USER_USERNAME=admin
 _AIRFLOW_WWW_USER_PASSWORD=<pick your initial admin pw here>
-OP_API_TOKEN=<Get from 1PW here: 'name TBD'>
-OP_CONNECT=<URL of the 1PW Connect install>
+OP_API_TOKEN=<Get from 1Password here: 'name TBD'>
+OP_CONNECT=<URL of the 1Password Connect install>
 ```
 * Execute `docker compose build`
 * Execute `docker compose up -d`
