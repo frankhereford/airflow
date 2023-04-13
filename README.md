@@ -23,6 +23,7 @@
 * access to the [server's docker service](https://github.com/frankhereford/airflow/blob/main/docker-compose.yaml#L90)
   * On worker containers and available for DAGs
 * [very minimal deployment changes](https://github.com/frankhereford/airflow/pull/22/files)
+  * server is vanilla Ubuntu LTS
 
 ## Local Setup
 * `.env` file:
