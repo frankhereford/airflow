@@ -29,7 +29,7 @@
 * [flexible reverse proxy](https://github.com/frankhereford/airflow/blob/main/haproxy/haproxy.cfg#L35-L54) to distribute HTTP requests over stack
 * Interface with Airflow via Web UI, CLI and API
   * CLI interface locally via: `docker compose run airflow-cli <command>`
-* [very minimal production deployment changes](https://github.com/frankhereford/airflow/pull/22/files)
+* [very minimal production deployment changes](https://github.com/frankhereford/airflow/pull/34/files)
   * server is EC2's vanilla Ubuntu LTS AMI
 
 ## Local Setup
