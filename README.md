@@ -19,7 +19,7 @@
 * [production environment](https://airflow.fyi) which runs on a `t3a.xlarge` class instance comfortably
   * full control over [production server configuration](https://github.com/frankhereford/airflow/blob/main/airflow.cfg), yet keeping the perks of a docker stack
 * [customizable python environment](https://github.com/frankhereford/airflow/blob/main/requirements.txt) for DAGs, including [external, binary libraries](https://github.com/frankhereford/airflow/blob/main/Dockerfile#L1414-L1415) built right into the container
-  * based on bog standard `requirements.txt`
+  * based on bog standard `requirements.txt` & ubuntu `apt` commands
 * access to the [server's docker service](https://github.com/frankhereford/airflow/blob/main/docker-compose.yaml#L90)
   * available on worker containers and available for DAGs
   * you can package your ETL up as an image and then run it in the DAG 📦🐳
