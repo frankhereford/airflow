@@ -8,6 +8,7 @@
     * attach to a worker `docker exec -it airflow-airflow-worker-1 bash`
     * run your dag with `airflow dags test weather-checker`, for example
     * continue to make changes to the code outside of running container and they will show up as you save your file in airflow
+* [production environment](https://airflow.fyi) which runs on a `t3a.xlarge` class instance comfortably
 * [onepassword secrets](https://github.com/frankhereford/airflow#local-setup)
   * built in, zero-config. You give it the secret name in 1PW, it gives you the value, right in the DAG
 * [working CI](https://github.com/frankhereford/airflow/blob/main/.github/workflows/production_deployment.yml), secured using 1PW secrets
