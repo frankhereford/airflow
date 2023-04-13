@@ -50,7 +50,7 @@ OP_CONNECT=<URL of the 1Password Connect install>
       * `-----BEGIN OPENSSH PRIVATE KEY-----`
       * `-----END OPENSSH PRIVATE KEY-----` or similar
   * We could change the checkout on the production machine to a `HTTPS` instead of `ssh` based git origin
-    * This would eliminate the need for this file / key
+    * This change would eliminate the need for this file / key
 * `.env` file
   * See above
 
