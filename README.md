@@ -76,8 +76,8 @@ docker compose down --volumes --remove-orphans
 ```
 
 ## Ideas
-* make it disable all dags on start locally (default / main) so it fails to safe
-* fix UID being applied by `webhook` image on `git pull`
+* Make it disable all DAGs on start locally so it fails to safe
+* Fix UID being applied by `webhook` image on `git pull`
 * Create remote worker image example
   * Use `docker compose` new `profile` support
 * Add slack integration?
