@@ -1,10 +1,10 @@
 # stuff to make the airflow, 1Password integration work
 import os
 import pendulum
-from datetime import timedelta
+import docker
+import onepasswordconnectsdk
 from airflow.decorators import dag, task
 from onepasswordconnectsdk.client import Client, new_client
-import onepasswordconnectsdk
 
 # libs for the dag portion, not the boilerplate
 import json
@@ -73,7 +73,7 @@ def etl_weather():
 
     # A load task which writes the forecast to an HTML file
     @task()
-    def write_out_html_file(forecast: str, time: str):
+    def write_out_html_file(forecast: str, time: str, logs: str):
         f = open("/opt/airflow/weather/index.html", "w")
         f.write(f"""
             <!DOCTYPE html>
@@ -98,9 +98,14 @@ def etl_weather():
                     text-align: right;
                     
                 }}
+                img {{
+                    justify-content: center;
+                    margin: 0 20px 0 20px;
+                }}
                 </style>
             </head>
             <body>
+                    <img src='annotated-image.jpg' alt='image manipulated with docker' />
                 <div>
                     <p class="weather">{forecast}</p>
                     <p class="smaller">{time}</p>
@@ -111,12 +116,26 @@ def etl_weather():
         """)
         f.close()
 
+    @task()
+    def download_image_and_annotate_with_docker():
+        client = docker.from_env()
+        # client.images.pull("signal-annotate")
+        logs = client.containers.run(
+            image="signal-annotate", 
+            volumes=['/Users/frank/Development/airflow/weather:/opt/weather']
+            )
+        return str(logs)
+
+    # the following lines are defining input and output of the tasks
+    # which is also used to define the DAG graph. This works well for
+    # simple DAGs, but the more complex it gets, the more you'll want to
+    # dive into the bitwise operators and the explicit methods used to 
+    # notate graph edges.
 
     time = get_time_in_austin_tx()
     weather = get_weather()
     forecast = get_forecast(weather)
-    write_out_html_file(forecast, time)
+    logs = download_image_and_annotate_with_docker()
+    write_out_html_file(forecast=forecast, time=time, logs=logs)
 
 etl_weather()
-
-
