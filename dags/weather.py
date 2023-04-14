@@ -122,7 +122,7 @@ def etl_weather():
         # client.images.pull("signal-annotate")
         logs = client.containers.run(
             image="signal-annotate", 
-            volumes=['/home/airflow/airflow/weather:/opt/weather'],
+            volumes=['/Users/frank/Development/airflow/weather:/opt/weather']
             )
         return str(logs)
 
