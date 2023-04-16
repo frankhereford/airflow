@@ -39,6 +39,7 @@ AIRFLOW_UID=<the numeric output of the following command: id -u>
 ENVIRONMENT=<development|production>
 _AIRFLOW_WWW_USER_USERNAME=admin
 _AIRFLOW_WWW_USER_PASSWORD=<pick your initial admin pw here>
+AIRFLOW_PROJ_DIR=<absolute path of airflow checkout>
 OP_API_TOKEN=<Get from 1Password here: 'name TBD'>
 OP_CONNECT=<URL of the 1Password Connect install>
 ```
