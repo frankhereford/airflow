@@ -16,7 +16,7 @@
 * support for picking [environment based secrets](https://github.com/frankhereford/airflow/blob/main/dags/weather.py#L18-L22) based on local/production
   * zero-config in DAG, based out of `.env`
 * supports remote workers
-  * monitor their status with [web UI](https://workers.airflow.fyi/)
+  * monitor their status with a [web UI](https://workers.airflow.fyi/)
     * shared credentials with admin airflow account
 * [production environment](https://airflow.fyi) which runs on a `t3a.xlarge` class instance comfortably
   * full control over [production server configuration](https://github.com/frankhereford/airflow/blob/main/airflow.cfg), yet keeping the perks of a docker stack
