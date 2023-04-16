@@ -30,7 +30,7 @@
 * Interface with Airflow via Web UI, CLI and API
   * CLI interface locally via: `docker compose run --rm airflow-cli <command>`
 * [very minimal production deployment changes](https://github.com/frankhereford/airflow/pull/34/files)
-  * server is EC2's vanilla Ubuntu LTS AMI
+  * server is EC2's vanilla Ubuntu LTS AMI + docker from docker's official PPA
   * [minimal changes](https://github.com/frankhereford/airflow/compare/045ea4d514b635abef67424062f6a100d80a723d...fbecb0d9e922465fafd62f5cb5b033498e2f5943#diff-dd2c0eb6ea5cfc6c4bd4eac30934e2d5746747af48fef6da689e85b752f39557) to stock Dockerfile
 
 ## Building multi-architecture docker images
