@@ -76,13 +76,14 @@ OP_CONNECT=<URL of the 1Password Connect install>
   * See above
 
 ## Useful Commands
-🐚 get a shell on a worker, for example
+* 🐚 get a shell on a worker, for example
 ```
 docker exec -it airflow-airflow-worker-1 bash
 ```
 
-Stop all containers and execute this to reset your local database.
-⛔️ do not run in production unless you feel really great about your backups. this will reset the history of your dag runs and switch states
+* ⛔ Stop all containers and execute this to reset your local database.
+  * Do not run in production unless you feel really great about your backups. 
+  * This will reset the history of your dag runs and switch states.
 ```
 docker compose down --volumes --remove-orphans
 ```
