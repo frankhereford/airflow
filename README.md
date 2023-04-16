@@ -8,7 +8,7 @@
   * you can run the ETL in a terminal and get `stdout` from the program and also a color-coded output of the DAG's interactions with the airflow orchestration
     * `docker compose run --rm airflow-cli dags test weather-checker`, for example
     * continue to make changes to the code outside of docker, and they will show up in airflow as you save
-* [1Password secret support](https://github.com/frankhereford/airflow/blob/main/dags/weather.py#L26-L37)
+* [1Password secret support](https://github.com/frankhereford/airflow/blob/main/dags/weather.py#L27-L38)
   * built in, zero-config. You give it the secret name in 1Password, it gives you the value, right in the DAG
 * [working CI](https://github.com/frankhereford/airflow/blob/main/.github/workflows/production_deployment.yml), triggered [via](https://github.com/frankhereford/airflow/blob/main/haproxy/haproxy.cfg#L64) [webhook](https://github.com/frankhereford/airflow/blob/main/webhook/webhook.py#L33-L46), [secured](https://github.com/frankhereford/airflow/blob/main/webhook/webhook.py#L37) using a 1Password entry 
   * automatically pulls from `production` when PRs are merged into the branch
@@ -22,7 +22,7 @@
   * full control over [production server configuration](https://github.com/frankhereford/airflow/blob/main/airflow.cfg), yet keeping the perks of a docker stack
 * [customizable python environment](https://github.com/frankhereford/airflow/blob/main/requirements.txt) for DAGs, including [external, binary libraries](https://github.com/frankhereford/airflow/blob/main/Dockerfile#L1414-L1415) built right into the container
   * based on bog standard `requirements.txt` & ubuntu `apt` commands
-* access to the [server's docker service](https://github.com/frankhereford/airflow/blob/main/docker-compose.yaml#L92)
+* access to the [server's docker service](https://github.com/frankhereford/airflow/blob/main/docker-compose.yaml#L93)
   * available on worker containers and available for DAGs
   * you can package your ETL up as an image and then run it in the DAG 📦🐳
     * skip installing libraries on the server
