@@ -13,7 +13,7 @@
 * [working CI](https://github.com/frankhereford/airflow/blob/main/.github/workflows/production_deployment.yml), triggered [via](https://github.com/frankhereford/airflow/blob/main/haproxy/haproxy.cfg#L64) [webhook](https://github.com/frankhereford/airflow/blob/main/webhook/webhook.py#L33-L46), [secured](https://github.com/frankhereford/airflow/blob/main/webhook/webhook.py#L37) using a 1Password entry 
   * automatically pulls from `production` when PRs are merged into the branch
   * you can rotate the webhook token by opening 1Password, editing [the entry](https://github.com/frankhereford/airflow/blob/main/webhook/webhook.py#L13), generating a new password, and saving it. 10 seconds, tops. 🏁
-* support for picking [environment based secrets](https://github.com/frankhereford/airflow/blob/main/dags/weather.py#L18-L22) based on local/production
+* support for picking [environment based secrets](https://github.com/frankhereford/airflow/blob/main/dags/weather.py#L19-L23) based on local/production
   * zero-config in DAG, based out of `.env`
 * supports remote workers
   * monitor their status with a [web UI](https://workers.airflow.fyi/)
