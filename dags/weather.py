@@ -10,10 +10,11 @@ from onepasswordconnectsdk.client import Client, new_client
 import json
 import urllib.request
 
-DEPLOYMENT_ENVIRONMENT = os.getenv("ENVIRONMENT")     # our current environment from ['production', 'development']
-ONEPASSWORD_CONNECT_TOKEN = os.getenv("OP_API_TOKEN") # our secret to get secrets 🤐
-ONEPASSWORD_CONNECT_HOST = os.getenv("OP_CONNECT")    # where we get our secrets
-VAULT_ID = "quvhrzaatbj2wotsjrumx3f62a"               # FLH personal Discovery Day vault - not a secret, per se ..
+AIRFLOW_CHECKOUT_PATH = os.getenv("AIRFLOW_CHECKOUT_PATH")  # The path to the airflow checkout, as seen from the host
+DEPLOYMENT_ENVIRONMENT = os.getenv("ENVIRONMENT")           # our current environment from ['production', 'development']
+ONEPASSWORD_CONNECT_TOKEN = os.getenv("OP_API_TOKEN")       # our secret to get secrets 🤐
+ONEPASSWORD_CONNECT_HOST = os.getenv("OP_CONNECT")          # where we get our secrets
+VAULT_ID = "quvhrzaatbj2wotsjrumx3f62a"                     # FLH personal Discovery Day vault - not a secret, per se ..
 
 # These secret names are entry titles in our 1Password secret vault.
 if DEPLOYMENT_ENVIRONMENT == "production":
