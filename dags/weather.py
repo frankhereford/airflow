@@ -119,7 +119,7 @@ def etl_weather():
     @task()
     def download_image_and_annotate_with_docker():
         client = docker.from_env()
-        # client.images.pull("signal-annotate")
+        client.images.pull("frankinaustin/signal-annotate")
         logs = client.containers.run(
             image="signal-annotate", 
             volumes=['/Users/frank/Development/airflow/weather:/opt/weather']
