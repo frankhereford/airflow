@@ -46,9 +46,9 @@ with DAG(
         auto_remove=True,
         command=f'./atd-road-conditions/socrata.py -d "{date_filter}"',
         # docker_url="tcp://localhost:2376",   # doesn't work locally, as set
-        network_mode="bridge",                 # don't need
+        network_mode="bridge",                 # does this need the signal network?
         environment=env_vars,
-        tty=True,                              # don't need
+        tty=True,                              # unsure if this is needed
     )
 
     t1
