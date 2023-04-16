@@ -117,18 +117,23 @@ def etl_weather():
         """)
         f.close()
 
+    # A task which is encapsulated in a docker image
     @task()
     def download_image_and_annotate_with_docker():
         client = docker.from_env()
+        # pull at run time
         client.images.pull("frankinaustin/signal-annotate")
         logs = client.containers.run(
             image="signal-annotate", 
+            # this docker image needs a place to write its output. the path is as seen from the host
+            # server, because we've passed down the docker socket into the container running the flow.
             volumes=[AIRFLOW_CHECKOUT_PATH + '/weather:/opt/weather']
             )
         return str(logs)
 
-    # define the DAG/flow of the tasks. There are a handful of other ways to do this, also.
+    # End of tasks, start of DAG
 
+    # Define the DAG/flow of the tasks. There are a handful of other ways to do this, also.
     time = get_time_in_austin_tx()
     weather = get_weather()
     forecast = get_forecast(weather)
