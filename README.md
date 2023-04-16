@@ -8,21 +8,21 @@
   * you can run the ETL in a terminal and get `stdout` from the program and also a color-coded output of the DAG's interactions with the airflow orchestration
     * `docker compose run --rm airflow-cli dags test weather-checker`, for example
     * continue to make changes to the code outside of docker, and they will show up in airflow as you save
-* [1Password secret support](https://github.com/frankhereford/airflow/blob/main/dags/weather.py#L26-L37)
+* [1Password secret support](https://github.com/frankhereford/airflow/blob/main/dags/weather.py#L27-L38)
   * built in, zero-config. You give it the secret name in 1Password, it gives you the value, right in the DAG
 * [working CI](https://github.com/frankhereford/airflow/blob/main/.github/workflows/production_deployment.yml), triggered [via](https://github.com/frankhereford/airflow/blob/main/haproxy/haproxy.cfg#L64) [webhook](https://github.com/frankhereford/airflow/blob/main/webhook/webhook.py#L33-L46), [secured](https://github.com/frankhereford/airflow/blob/main/webhook/webhook.py#L37) using a 1Password entry 
   * automatically pulls from `production` when PRs are merged into the branch
   * you can rotate the webhook token by opening 1Password, editing [the entry](https://github.com/frankhereford/airflow/blob/main/webhook/webhook.py#L13), generating a new password, and saving it. 10 seconds, tops. 🏁
-* support for picking [environment based secrets](https://github.com/frankhereford/airflow/blob/main/dags/weather.py#L18-L22) based on local/production
+* support for picking [environment based secrets](https://github.com/frankhereford/airflow/blob/main/dags/weather.py#L19-L23) based on local/production
   * zero-config in DAG, based out of `.env`
 * supports remote workers
-  * monitor their status with [web UI](https://workers.airflow.fyi/)
+  * monitor their status with a [web UI](https://workers.airflow.fyi/)
     * shared credentials with admin airflow account
 * [production environment](https://airflow.fyi) which runs on a `t3a.xlarge` class instance comfortably
   * full control over [production server configuration](https://github.com/frankhereford/airflow/blob/main/airflow.cfg), yet keeping the perks of a docker stack
 * [customizable python environment](https://github.com/frankhereford/airflow/blob/main/requirements.txt) for DAGs, including [external, binary libraries](https://github.com/frankhereford/airflow/blob/main/Dockerfile#L1414-L1415) built right into the container
   * based on bog standard `requirements.txt` & ubuntu `apt` commands
-* access to the [server's docker service](https://github.com/frankhereford/airflow/blob/main/docker-compose.yaml#L92)
+* access to the [server's docker service](https://github.com/frankhereford/airflow/blob/main/docker-compose.yaml#L93)
   * available on worker containers and available for DAGs
   * you can package your ETL up as an image and then run it in the DAG 📦🐳
     * skip installing libraries on the server
@@ -30,7 +30,8 @@
 * Interface with Airflow via Web UI, CLI and API
   * CLI interface locally via: `docker compose run --rm airflow-cli <command>`
 * [very minimal production deployment changes](https://github.com/frankhereford/airflow/pull/34/files)
-  * server is EC2's vanilla Ubuntu LTS AMI
+  * server is EC2's vanilla Ubuntu LTS AMI + docker from docker's official PPA
+  * [minimal changes](https://github.com/frankhereford/airflow/compare/045ea4d514b635abef67424062f6a100d80a723d...fbecb0d9e922465fafd62f5cb5b033498e2f5943#diff-dd2c0eb6ea5cfc6c4bd4eac30934e2d5746747af48fef6da689e85b752f39557) to stock Dockerfile
 
 ## Building multi-architecture docker images
 
