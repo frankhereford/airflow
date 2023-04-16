@@ -51,6 +51,20 @@ SECRETS = onepasswordconnectsdk.load_dict(client, REQUIRED_SECRETS)
 
 def etl_weather():
 
+    # A task which is encapsulated in a docker image
+    @task()
+    def download_image_and_annotate_with_docker():
+        client = docker.from_env()
+        # pull at run time
+        client.images.pull("frankinaustin/signal-annotate")
+        logs = client.containers.run(
+            image="signal-annotate", 
+            # this docker image needs a place to write its output. the path is as seen from the host
+            # server, because we've passed down the docker socket into the container running the flow.
+            volumes=[AIRFLOW_CHECKOUT_PATH + '/weather:/opt/weather']
+            )
+        return str(logs)
+
     # An extract task to get the time in Austin
     @task()
     def get_time_in_austin_tx():
@@ -117,19 +131,6 @@ def etl_weather():
         """)
         f.close()
 
-    # A task which is encapsulated in a docker image
-    @task()
-    def download_image_and_annotate_with_docker():
-        client = docker.from_env()
-        # pull at run time
-        client.images.pull("frankinaustin/signal-annotate")
-        logs = client.containers.run(
-            image="signal-annotate", 
-            # this docker image needs a place to write its output. the path is as seen from the host
-            # server, because we've passed down the docker socket into the container running the flow.
-            volumes=[AIRFLOW_CHECKOUT_PATH + '/weather:/opt/weather']
-            )
-        return str(logs)
 
     # End of tasks, start of DAG
 
