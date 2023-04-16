@@ -34,7 +34,7 @@
 
 ## Building multi-architecture docker images
 
-* Images created locally by default are ARM64 on a modern mac. The need to also support the server's architecture, which is AMD64.
+* Images created locally by default are ARM64 on a modern mac. They need to also support the server's architecture, which is AMD64.
 
 ```
 docker buildx build \
