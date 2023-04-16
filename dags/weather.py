@@ -55,10 +55,11 @@ def etl_weather():
     @task()
     def download_image_and_annotate_with_docker():
         client = docker.from_env()
-        # pull at run time
-        client.images.pull("frankinaustin/signal-annotate")
+        docker_image = "frankinaustin/signal-annotate:latest"
+        # pull at run time; remember to publish a amd64 image to dockerhub
+        client.images.pull(docker_image)
         logs = client.containers.run(
-            image="signal-annotate", 
+            image=docker_image, 
             # this docker image needs a place to write its output. the path is as seen from the host
             # server, because we've passed down the docker socket into the container running the flow.
             volumes=[AIRFLOW_CHECKOUT_PATH + '/weather:/opt/weather']
