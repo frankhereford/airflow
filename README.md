@@ -32,6 +32,17 @@
 * [very minimal production deployment changes](https://github.com/frankhereford/airflow/pull/34/files)
   * server is EC2's vanilla Ubuntu LTS AMI
 
+## Building multi-architecture docker images
+
+* Images created locally by default are ARM64 on a modern mac. The need to also support the server's architecture, which is AMD64.
+
+```
+docker buildx build \
+--push \
+--platform linux/arm/v7,linux/arm64/v8,linux/amd64 \
+--tag frankinaustin/signal-annotate:latest .
+```
+
 ## Local Setup
 * `.env` file:
 ```
@@ -50,16 +61,6 @@ OP_CONNECT=<URL of the 1Password Connect install>
 * The webhook flask app at http://localhost:8082
 * The workers' status page at http://localhost:8083
 
-## Building multi-architecture docker images
-
-* Images created locally by default are ARM64 on a modern mac. The need to also support the server's architecture, which is AMD64.
-
-```
-docker buildx build \
---push \
---platform linux/arm/v7,linux/arm64/v8,linux/amd64 \
---tag frankinaustin/signal-annotate:latest .
-```
 
 ## Production Setup
 * GitHub key pair
@@ -74,15 +75,8 @@ docker buildx build \
   * See above
 
 ## Useful Commands
+🐚 get a shell on a worker, for example
 ```
-# 🐚 get a root shell on the scheduler, for example
-
-docker exec -u root -it airflow-airflow-scheduler-1 bash
-```
-
-```
-# 🐚 get a shell on a worker, for example
-
 docker exec -it airflow-airflow-worker-1 bash
 ```
 
