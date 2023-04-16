@@ -56,7 +56,7 @@ def etl_weather():
     def download_image_and_annotate_with_docker():
         client = docker.from_env()
         docker_image = "frankinaustin/signal-annotate:latest"
-        # pull at run time; remember to publish a amd64 image to dockerhub
+        # pull at run time; remember to publish a amd64 image to docker hub
         client.images.pull(docker_image)
         logs = client.containers.run(
             image=docker_image, 

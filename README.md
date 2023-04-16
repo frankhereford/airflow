@@ -32,8 +32,20 @@
 * [very minimal production deployment changes](https://github.com/frankhereford/airflow/pull/34/files)
   * server is EC2's vanilla Ubuntu LTS AMI
 
+## Building multi-architecture docker images
+
+* Images created locally by default are ARM64 on a modern mac. They need to also support the server's architecture, which is AMD64.
+
+```
+docker buildx build \
+--push \
+--platform linux/arm/v7,linux/arm64/v8,linux/amd64 \
+--tag frankinaustin/signal-annotate:latest .
+```
+
 ## Local Setup
 * `.env` file:
+
 ```
 AIRFLOW_UID=<the numeric output of the following command: id -u>
 ENVIRONMENT=<development|production>
@@ -43,6 +55,7 @@ AIRFLOW_PROJ_DIR=<absolute path of airflow checkout>
 OP_API_TOKEN=<Get from 1Password here: 'name TBD'>
 OP_CONNECT=<URL of the 1Password Connect install>
 ```
+
 * `docker compose build`
 * `docker compose up -d`
 * Airflow is available at http://localhost:8080
@@ -63,23 +76,15 @@ OP_CONNECT=<URL of the 1Password Connect install>
   * See above
 
 ## Useful Commands
+* 🐚 get a shell on a worker, for example
 ```
-# 🐚 get a root shell on the scheduler, for example
-
-docker exec -u root -it airflow-airflow-scheduler-1 bash
-```
-
-```
-# 🐚 get a shell on a worker, for example
-
 docker exec -it airflow-airflow-worker-1 bash
 ```
 
+* ⛔ Stop all containers and execute this to reset your local database.
+  * Do not run in production unless you feel really great about your backups. 
+  * This will reset the history of your dag runs and switch states.
 ```
-# stop all containers and execute this to reset your local database
-# ⛔️ do not run in production unless you feel really great about your backups
-# ⛔️ this will reset the history of your dag runs and switch states
-
 docker compose down --volumes --remove-orphans
 ```
 
