@@ -50,6 +50,17 @@ OP_CONNECT=<URL of the 1Password Connect install>
 * The webhook flask app at http://localhost:8082
 * The workers' status page at http://localhost:8083
 
+## Building multi-architecture docker images
+
+* Images created locally by default are ARM64 on a modern mac. The need to also support the server's architecture, which is AMD64.
+
+```
+docker buildx build \
+--push \
+--platform linux/arm/v7,linux/arm64/v8,linux/amd64 \
+--tag frankinaustin/signal-annotate:latest .
+```
+
 ## Production Setup
 * GitHub key pair
   * Public key installed on GitHub
