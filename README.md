@@ -81,11 +81,9 @@ OP_CONNECT=<URL of the 1Password Connect install>
 docker exec -it airflow-airflow-worker-1 bash
 ```
 
+Stop all containers and execute this to reset your local database.
+⛔️ do not run in production unless you feel really great about your backups. this will reset the history of your dag runs and switch states
 ```
-# stop all containers and execute this to reset your local database
-# ⛔️ do not run in production unless you feel really great about your backups
-# ⛔️ this will reset the history of your dag runs and switch states
-
 docker compose down --volumes --remove-orphans
 ```
 
