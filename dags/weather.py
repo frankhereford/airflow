@@ -1,19 +1,20 @@
 # stuff to make the airflow, 1Password integration work
 import os
 import pendulum
-from datetime import timedelta
+import docker
+import onepasswordconnectsdk
 from airflow.decorators import dag, task
 from onepasswordconnectsdk.client import Client, new_client
-import onepasswordconnectsdk
 
 # libs for the dag portion, not the boilerplate
 import json
 import urllib.request
 
-DEPLOYMENT_ENVIRONMENT = os.getenv("ENVIRONMENT")     # our current environment from ['production', 'development']
-ONEPASSWORD_CONNECT_TOKEN = os.getenv("OP_API_TOKEN") # our secret to get secrets 🤐
-ONEPASSWORD_CONNECT_HOST = os.getenv("OP_CONNECT")    # where we get our secrets
-VAULT_ID = "quvhrzaatbj2wotsjrumx3f62a"               # FLH personal Discovery Day vault - not a secret, per se ..
+AIRFLOW_CHECKOUT_PATH = os.getenv("AIRFLOW_CHECKOUT_PATH")  # The path to the airflow checkout, as seen from the host
+DEPLOYMENT_ENVIRONMENT = os.getenv("ENVIRONMENT")           # our current environment from ['production', 'development']
+ONEPASSWORD_CONNECT_TOKEN = os.getenv("OP_API_TOKEN")       # our secret to get secrets 🤐
+ONEPASSWORD_CONNECT_HOST = os.getenv("OP_CONNECT")          # where we get our secrets
+VAULT_ID = "quvhrzaatbj2wotsjrumx3f62a"                     # FLH personal Discovery Day vault - not a secret, per se ..
 
 # These secret names are entry titles in our 1Password secret vault.
 if DEPLOYMENT_ENVIRONMENT == "production":
@@ -50,6 +51,20 @@ SECRETS = onepasswordconnectsdk.load_dict(client, REQUIRED_SECRETS)
 
 def etl_weather():
 
+    # A task which is encapsulated in a docker image
+    @task()
+    def download_image_and_annotate_with_docker():
+        client = docker.from_env()
+        # pull at run time
+        client.images.pull("frankinaustin/signal-annotate")
+        logs = client.containers.run(
+            image="signal-annotate", 
+            # this docker image needs a place to write its output. the path is as seen from the host
+            # server, because we've passed down the docker socket into the container running the flow.
+            volumes=[AIRFLOW_CHECKOUT_PATH + '/weather:/opt/weather']
+            )
+        return str(logs)
+
     # An extract task to get the time in Austin
     @task()
     def get_time_in_austin_tx():
@@ -73,7 +88,7 @@ def etl_weather():
 
     # A load task which writes the forecast to an HTML file
     @task()
-    def write_out_html_file(forecast: str, time: str):
+    def write_out_html_file(forecast: str, time: str, logs: str):
         f = open("/opt/airflow/weather/index.html", "w")
         f.write(f"""
             <!DOCTYPE html>
@@ -98,9 +113,14 @@ def etl_weather():
                     text-align: right;
                     
                 }}
+                img {{
+                    justify-content: center;
+                    margin: 0 20px 0 20px;
+                }}
                 </style>
             </head>
             <body>
+                    <img src='annotated-image.jpg' alt='image manipulated with docker' />
                 <div>
                     <p class="weather">{forecast}</p>
                     <p class="smaller">{time}</p>
@@ -112,11 +132,13 @@ def etl_weather():
         f.close()
 
 
+    # End of tasks, start of DAG
+
+    # Define the DAG/flow of the tasks. There are a handful of other ways to do this, also.
     time = get_time_in_austin_tx()
     weather = get_weather()
     forecast = get_forecast(weather)
-    write_out_html_file(forecast, time)
+    logs = download_image_and_annotate_with_docker()
+    write_out_html_file(forecast=forecast, time=time, logs=logs)
 
 etl_weather()
-
-
