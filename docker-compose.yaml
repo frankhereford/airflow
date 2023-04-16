@@ -71,6 +71,7 @@ x-airflow-common:
     ENVIRONMENT: ${ENVIRONMENT}
     FLOWER_AUTH_USERNAME: ${_AIRFLOW_WWW_USER_USERNAME}
     FLOWER_AUTH_PASSWORD: ${_AIRFLOW_WWW_USER_PASSWORD}
+    AIRFLOW_CHECKOUT_PATH: ${AIRFLOW_PROJ_DIR} 
 
     # yamllint disable rule:line-length
     # Use simple http server on scheduler for health checks

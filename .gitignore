@@ -1,7 +1,8 @@
 dags/__pycache__
 haproxy/ssl/*pem
 logs/*
-weather/index.html
+weather/*.html
+weather/*.jpg
 .env
 venv
 *.swp
