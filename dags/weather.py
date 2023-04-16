@@ -130,7 +130,7 @@ def etl_weather():
     # which is also used to define the DAG graph. This works well for
     # simple DAGs, but the more complex it gets, the more you'll want to
     # dive into the bitwise operators and the explicit methods used to 
-    # notate graph edges.
+    # define graph edges.
 
     time = get_time_in_austin_tx()
     weather = get_weather()
