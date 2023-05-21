@@ -41,7 +41,7 @@ jobs:
           # Export loaded secrets as environment variables
           export-env: true
         env:
-          WEBHOOK_ADDRESS: op://${{ secrets.OP_VAULT_ID }}/Airflow\ Webhook/smee/address)
+          WEBHOOK_ADDRESS: op://${{ secrets.OP_VAULT_ID }}/Airflow\ Webhook/smee/address
 
 
       #- name: Load secret
