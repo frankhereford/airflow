@@ -35,9 +35,6 @@ jobs:
         env:
           WEBHOOK_KEY: op://${{ secrets.OP_VAULT_ID  }}/Airflow\ Webhook/password
 
-      - name: Print masked secret
-        run: "echo 'WEBHOOK_KEY: {{ env.WEBHOOK_KEY }}'"
-
       - name: Load web hook secrets
         uses: 1password/load-secrets-action@v1
         with:
