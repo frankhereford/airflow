@@ -33,11 +33,15 @@ jobs:
           # Export loaded secrets as environment variables
           export-env: true
         env:
-          #OP_CONNECT_TOKEN: ${{ secrets.OP_API_TOKEN }}
-          # DOCKERHUB_USERNAME: op://app-cicd/docker/username
-          # DOCKERHUB_TOKEN: op://app-cicd/docker/token
-          WEBHOOK_KEY: "op://${{ secrets.OP_VAULT_ID  }}/Airflow\ Webhook/password"
-          WEBHOOK_ADDRESS: "op://${{ secrets.OP_VAULT_ID }}/Airflow\ Webhook/smee/address)"
+          WEBHOOK_KEY: op://${{ secrets.OP_VAULT_ID  }}/Airflow\ Webhook/password
+
+      - name: Load web hook secrets
+        uses: 1password/load-secrets-action@v1
+        with:
+          # Export loaded secrets as environment variables
+          export-env: true
+        env:
+          WEBHOOK_ADDRESS: op://${{ secrets.OP_VAULT_ID }}/Airflow\ Webhook/smee/address)
 
 
       #- name: Load secret
