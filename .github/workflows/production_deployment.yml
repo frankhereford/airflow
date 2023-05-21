@@ -20,11 +20,13 @@ jobs:
         env:
           OP_CONNECT_HOST: ${{ secrets.OP_CONNECT }}
           OP_CONNECT_TOKEN: ${{ secrets.OP_API_TOKEN }}
-          WEBHOOK_KEY: "op://Discovery Day/airflow.fyi webhook key/password"
+          WEBHOOK_KEY: "op://${{ secrets.OP_VAULT_ID  }}/Airflow\ Webhook/password"
+          WEBHOOK_ADDRESS: "op://${{ secrets.OP_VAULT_ID }}/Airflow\ Webhook/smee/address)"
 
       - name: Invoke deployment hook
         uses: distributhor/workflow-webhook@v2
         env:
-          webhook_url: ${{ secrets.AIRFLOW_WEBHOOK_URL}}
+          webhook_url: ${{ env.WEBHOOK_ADDRESS }}
           webhook_secret: ${{ env.WEBHOOK_KEY }}
-          data: '{ "webhook_key": "${{ env.WEBHOOK_KEY }}" }'
+          curl_opts: '-H "X-Webhook-Key: ${{ env.WEBHOOK_KEY }}"'
+          # data: '{ "webhook_key": "${{ env.WEBHOOK_KEY }}" }'
