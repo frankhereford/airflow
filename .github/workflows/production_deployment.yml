@@ -23,6 +23,7 @@ jobs:
           OP_CONNECT_HOST: ${{ secrets.OP_CONNECT }}
           OP_CONNECT_TOKEN: ${{ secrets.OP_API_TOKEN }}
           WEBHOOK_KEY: "op://${{ secrets.OP_VAULT_ID  }}/Airflow\ Webhook/password"
+          SECOND_WEBHOOK_KEY: "op://${{ secrets.OP_VAULT_ID  }}/Airflow\ Webhook/password"
           WEBHOOK_ADDRESS: "op://${{ secrets.OP_VAULT_ID }}/Airflow\ Webhook/smee/address)"
 
       - name: Invoke deployment hook
