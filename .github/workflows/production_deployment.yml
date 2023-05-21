@@ -44,13 +44,6 @@ jobs:
         # env:
           # WEBHOOK_ADDRESS: "op://${{ secrets.OP_VAULT_ID }}/Airflow Webhook/smee/address"
 
-
-      #- name: Load secret
-        #id: op-load-secret
-        #uses: 1password/load-secrets-action@v1
-        #env:
-          #OP_CONNECT_TOKEN: ${{ secrets.OP_API_TOKEN }}
-
       - name: Invoke deployment hook
         uses: distributhor/workflow-webhook@v2
         env:
