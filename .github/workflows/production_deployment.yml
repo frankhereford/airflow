@@ -25,7 +25,7 @@ jobs:
           # the Connect token using input `connect-token`, but keep in mind that
           # this will grant all steps of the job access to the token.
           connect-host: ${{ secrets.OP_CONNECT }}
-          connect-token: ${{ secrets.OP_CONNECT_TOKEN }}
+          connect-token: ${{ secrets.OP_API_TOKEN}}
 
       - name: Load web hook secrets
         uses: 1password/load-secrets-action@v1
@@ -33,6 +33,7 @@ jobs:
           # Export loaded secrets as environment variables
           export-env: true
         env:
+          #OP_CONNECT_TOKEN: ${{ secrets.OP_API_TOKEN }}
           # DOCKERHUB_USERNAME: op://app-cicd/docker/username
           # DOCKERHUB_TOKEN: op://app-cicd/docker/token
           WEBHOOK_KEY: "op://${{ secrets.OP_VAULT_ID  }}/Airflow\ Webhook/password"
